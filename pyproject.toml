@@ -1,0 +1,12 @@
+[project]
+name = "semiconductor-cycle"
+version = "0.1.0"
+description = "반도체 사이클 — 핵심 성장률 지표를 출처별로 각각 추적 + 통합 해석"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas>=2.2",
+    "requests>=2.32",
+    "yfinance>=0.2.40",
+    "finance-datareader>=0.9.96",
+]

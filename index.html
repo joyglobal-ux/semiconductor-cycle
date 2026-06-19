@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>반도체 사이클 · Polaris</title>
+<meta name="description" content="핵심 반도체 성장률 지표를 출처별로 각각 추적하고, 그 위에 통합 해석을 얹는다.">
+<style>
+  :root{
+    --bg:#0b0d14; --bg2:#0f1117; --panel:#161a24; --panel2:#1d2230; --line:#272d3c;
+    --txt:#e8eaf0; --muted:#9aa3b2; --faint:#69727f;
+    --accent:#8b9bff; --accent-dim:#5b6bd6; --gold:#ffd66b;
+    --go:#22c55e; --stop:#ef4444;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Segoe UI",sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  .wrap{max-width:920px;margin:0 auto;padding:22px 20px 60px}
+  .backlink{display:inline-block;font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:16px}
+  .backlink:hover{color:var(--accent)}
+  h1{font-size:24px;font-weight:800;letter-spacing:-.4px;margin:0}
+  .sub{color:var(--muted);font-size:13px;margin-top:6px}
+  .updated{font-size:11.5px;color:var(--faint);margin-top:8px;font-variant-numeric:tabular-nums}
+  .updated b{color:var(--muted);font-weight:600}
+
+  /* 통합 해석 배너 */
+  .verdict{margin:22px 0 8px;border:1px solid var(--line);border-radius:16px;background:var(--panel);
+    padding:18px 20px;position:relative;overflow:hidden}
+  .verdict .vtop{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .regime{font-size:15px;font-weight:800;padding:6px 14px;border-radius:10px;letter-spacing:-.2px}
+  .regime .en{font-size:11px;font-weight:700;opacity:.7;margin-left:7px;text-transform:uppercase;letter-spacing:1px}
+  .tally{font-size:12px;color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums}
+  .headline{font-size:15px;color:var(--txt);margin-top:13px;font-weight:600;line-height:1.55}
+  .bullets{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{font-size:12px;color:var(--muted);background:var(--panel2);border:1px solid var(--line);
+    border-radius:8px;padding:5px 10px;display:flex;align-items:center;gap:7px}
+  .chip b{color:var(--txt);font-weight:700}
+  .chip .st{font-size:10.5px;padding:1px 6px;border-radius:5px;font-weight:700}
+
+  .shead{display:flex;align-items:center;gap:10px;margin:30px 0 13px}
+  .shead .ttl{font-size:13px;font-weight:800;color:var(--txt);letter-spacing:.2px}
+  .shead .desc{font-size:11.5px;color:var(--faint)}
+  .shead .ln{flex:1;height:1px;background:var(--line)}
+
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.cards{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:16px 17px;
+    display:flex;flex-direction:column;min-height:148px}
+  .card.dim{opacity:.62}
+  .card .crole{font-size:11px;color:var(--faint);font-weight:600}
+  .card h3{font-size:15.5px;font-weight:800;margin:3px 0 0;letter-spacing:-.2px}
+  .card .val{display:flex;align-items:baseline;gap:8px;margin-top:11px}
+  .card .num{font-size:30px;font-weight:800;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+  .card .unit{font-size:12px;color:var(--faint);font-weight:700}
+  .card .dir{font-size:12.5px;font-weight:700;margin-top:2px}
+  .card .spark{margin-top:auto;padding-top:12px}
+  .card canvas{width:100%;height:38px;display:block}
+  .card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:11px;
+    font-size:11px;color:var(--faint)}
+  .card .src:hover{color:var(--accent)}
+  .badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px;letter-spacing:.2px}
+  .b-auto{color:var(--go);background:rgba(34,197,94,.1)}
+  .b-key{color:var(--gold);background:rgba(255,214,107,.1)}
+  .b-manual{color:var(--accent);background:rgba(139,155,255,.1)}
+  .b-err{color:var(--stop);background:rgba(239,68,68,.1)}
+  .pend{font-size:22px;font-weight:800;color:var(--faint);margin-top:11px}
+
+  .foot-note{margin-top:34px;font-size:11.5px;color:var(--faint);line-height:1.7;
+    border-top:1px solid var(--line);padding-top:16px}
+  .foot-note b{color:var(--muted);font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="backlink" href="/">← Polaris 허브</a>
+  <h1>반도체 사이클</h1>
+  <div class="sub">핵심 성장률 지표를 출처별로 <b style="color:var(--txt)">각각</b> 추적 · 그 위에 통합 해석 한 층</div>
+  <div class="updated" id="updated">불러오는 중…</div>
+
+  <div id="verdict"></div>
+
+  <div class="shead" style="margin-top:26px">
+    <span class="ttl">성장률 (펀더멘털)</span>
+    <span class="desc">수요·매출·생산</span>
+    <span class="ln"></span>
+  </div>
+  <div class="cards" id="growth"></div>
+
+  <div class="shead">
+    <span class="ttl">시장 신호</span>
+    <span class="desc">주가가 선반영하는 사이클</span>
+    <span class="ln"></span>
+  </div>
+  <div class="cards" id="market"></div>
+
+  <div class="foot-note" id="note"></div>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  var D = window.SEMI_DATA;
+  if(!D){ document.getElementById('updated').textContent = 'data.js 로드 실패 — refresh.py를 먼저 실행하세요.'; return; }
+
+  var TONE = {
+    pos:      {c:'var(--go)',     bg:'rgba(34,197,94,.13)'},
+    warn:     {c:'var(--gold)',   bg:'rgba(255,214,107,.13)'},
+    'warn-pos':{c:'var(--accent)',bg:'rgba(139,155,255,.13)'},
+    neg:      {c:'var(--stop)',   bg:'rgba(239,68,68,.13)'},
+    neutral:  {c:'var(--muted)',  bg:'var(--panel2)'}
+  };
+  var DIR = {
+    up:  {t:'▲ 가속', c:'var(--go)'},
+    down:{t:'▼ 둔화', c:'var(--stop)'},
+    flat:{t:'▶ 보합', c:'var(--muted)'}
+  };
+  var STATUS = {
+    'auto':         {t:'자동', cls:'b-auto'},
+    'manual':       {t:'수동', cls:'b-manual'},
+    'pending-key':  {t:'키 발급 후 활성화', cls:'b-key'},
+    'pending-input':{t:'월 1회 수동 입력', cls:'b-manual'},
+    'error':        {t:'수집 오류', cls:'b-err'}
+  };
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function fmt(v){ return (v>=0?'+':'') + v; }
+
+  // ── 갱신 시각
+  var g = D.generatedAt || '';
+  document.getElementById('updated').innerHTML = '갱신 <b>'+esc(g.slice(0,16).replace('T',' '))+' UTC</b>';
+
+  // ── 통합 해석
+  var iv = D.interpretation, tone = TONE[iv.tone] || TONE.neutral;
+  var chips = iv.bullets.map(function(b){
+    var st = b.state ? '<span class="st" style="color:'+tone.c+';background:'+tone.bg+'">'+esc(b.state)+'</span>' : '';
+    return '<span class="chip"><b>'+esc(b.label)+'</b> '+esc(b.text)+' '+st+'</span>';
+  }).join('');
+  document.getElementById('verdict').innerHTML =
+    '<div class="verdict">'+
+      '<div class="vtop">'+
+        '<span class="regime" style="color:'+tone.c+';background:'+tone.bg+'">'+esc(iv.regime)+
+          '<span class="en">'+esc(iv.regimeEn)+'</span></span>'+
+        '<span class="tally">성장지표 '+iv.growthPositive+'/'+iv.growthCount+' 플러스 · '+iv.growthRising+' 가속 · 라이브 '+iv.liveCount+'</span>'+
+      '</div>'+
+      '<div class="headline">'+esc(iv.headline)+'</div>'+
+      (chips?'<div class="bullets">'+chips+'</div>':'')+
+    '</div>';
+
+  // ── 카드 렌더
+  function card(i){
+    var dim = i.value===null ? ' dim' : '';
+    var stt = STATUS[i.status] || STATUS.auto;
+    var valBlock;
+    if(i.value===null){
+      valBlock = '<div class="pend">—</div>';
+    }else{
+      var d = DIR[i.dir]||DIR.flat;
+      valBlock =
+        '<div class="val"><span class="num">'+fmt(i.value)+'</span><span class="unit">% '+esc(i.unit)+'</span></div>'+
+        '<div class="dir" style="color:'+d.c+'">'+d.t+'</div>';
+    }
+    var canvasId = 'sp_'+i.id;
+    return '<div class="card'+dim+'">'+
+      '<div class="crole">'+esc(i.role)+'</div>'+
+      '<h3>'+esc(i.label)+'</h3>'+
+      valBlock+
+      '<div class="spark"><canvas id="'+canvasId+'"></canvas></div>'+
+      '<div class="foot">'+
+        '<a class="src" href="'+esc(i.sourceUrl)+'" target="_blank" rel="noopener">'+esc(i.source)+' ↗</a>'+
+        '<span class="badge '+stt.cls+'">'+esc(stt.t)+(i.asOf?' · '+esc(i.asOf):'')+'</span>'+
+      '</div>'+
+    '</div>';
+  }
+
+  var growth = D.indicators.filter(function(i){return i.group==='growth';});
+  var market = D.indicators.filter(function(i){return i.group==='market';});
+  document.getElementById('growth').innerHTML = growth.map(card).join('');
+  document.getElementById('market').innerHTML = market.map(card).join('');
+
+  // ── 스파크라인
+  function spark(i){
+    var cv = document.getElementById('sp_'+i.id);
+    if(!cv || !i.history || i.history.length<2) return;
+    var dpr = window.devicePixelRatio||1, w = cv.clientWidth, h = 38;
+    cv.width = w*dpr; cv.height = h*dpr;
+    var ctx = cv.getContext('2d'); ctx.scale(dpr,dpr);
+    var vs = i.history.map(function(p){return p.v;});
+    var min = Math.min.apply(null,vs), max = Math.max.apply(null,vs);
+    var lo = Math.min(min,0), hi = Math.max(max,0), rng = (hi-lo)||1;
+    var col = (i.dir==='down')?'#ef4444':(i.dir==='up'?'#22c55e':'#9aa3b2');
+    function X(k){return (k/(vs.length-1))*(w-2)+1;}
+    function Y(v){return h-2 - ((v-lo)/rng)*(h-4);}
+    // 0선
+    if(lo<0 && hi>0){ ctx.strokeStyle='#272d3c'; ctx.lineWidth=1; ctx.beginPath();
+      ctx.moveTo(0,Y(0)); ctx.lineTo(w,Y(0)); ctx.stroke(); }
+    // 영역
+    ctx.beginPath(); ctx.moveTo(X(0),Y(vs[0]));
+    for(var k=1;k<vs.length;k++) ctx.lineTo(X(k),Y(vs[k]));
+    ctx.strokeStyle=col; ctx.lineWidth=1.6; ctx.lineJoin='round'; ctx.stroke();
+    ctx.lineTo(X(vs.length-1),h); ctx.lineTo(X(0),h); ctx.closePath();
+    ctx.globalAlpha=.10; ctx.fillStyle=col; ctx.fill(); ctx.globalAlpha=1;
+    // 끝점
+    ctx.beginPath(); ctx.arc(X(vs.length-1),Y(vs[vs.length-1]),2.4,0,7); ctx.fillStyle=col; ctx.fill();
+  }
+  D.indicators.forEach(spark);
+  window.addEventListener('resize', function(){ D.indicators.forEach(spark); });
+
+  document.getElementById('note').innerHTML =
+    '<b>읽는 법.</b> 각 카드는 해당 출처에서 직접 검증 가능한 원수치입니다. 상단 통합 해석은 점수 합산이 아니라 '+
+    '규칙 기반 국면 판정(플러스/가속 다수결 + 선행지표 방향)입니다. 반도체는 사이클 산업이라 '+
+    '<b>레벨보다 방향(가속·둔화)</b>이 매매 신호에 가깝습니다.<br>'+
+    '<b>데이터.</b> 자동(FRED·SOX)은 매일/월초 자동 갱신. <b>한국 수출</b>은 ECOS 무료 키 연결 시, '+
+    '<b>WSTS·DRAM</b>은 manual.json 월 1회 입력 시 활성화됩니다. · '+esc(D.note||'');
+})();
+</script>
+</body>
+</html>
