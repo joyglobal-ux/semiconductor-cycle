@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-19T23:02:52+00:00",
+  "generatedAt": "2026-06-19T23:42:29+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -160,7 +160,23 @@
           "v": 172.77
         }
       ],
-      "state": "확장·가속"
+      "mom": {
+        "phase": "가속 둔화",
+        "tone": "warn",
+        "level": 172.8,
+        "mom": -5.9,
+        "slope3": 6.8,
+        "peakValue": 178.7,
+        "peakTime": "2026-04",
+        "peakAgo": 1,
+        "fromPeak": -5.9,
+        "troughValue": -33.7,
+        "troughTime": "2023-07",
+        "troughAgo": 34,
+        "fromTrough": 206.5,
+        "peakIdx": 34,
+        "troughIdx": 1
+      }
     },
     {
       "id": "us_semi_production",
@@ -321,7 +337,23 @@
           "v": 14.39
         }
       ],
-      "state": "확장·가속"
+      "mom": {
+        "phase": "가속",
+        "tone": "pos",
+        "level": 14.4,
+        "mom": 1.2,
+        "slope3": 4.1,
+        "peakValue": 19.6,
+        "peakTime": "2025-07",
+        "peakAgo": 10,
+        "fromPeak": -5.2,
+        "troughValue": 0.3,
+        "troughTime": "2023-09",
+        "troughAgo": 32,
+        "fromTrough": 14.1,
+        "peakIdx": 25,
+        "troughIdx": 3
+      }
     },
     {
       "id": "sox_momentum",
@@ -482,7 +514,23 @@
           "v": 89.0
         }
       ],
-      "state": "확장·가속"
+      "mom": {
+        "phase": "가속",
+        "tone": "pos",
+        "level": 89.0,
+        "mom": 30.6,
+        "slope3": 81.9,
+        "peakValue": 89.0,
+        "peakTime": "2026-06",
+        "peakAgo": 0,
+        "fromPeak": 0.0,
+        "troughValue": -16.7,
+        "troughTime": "2023-10",
+        "troughAgo": 32,
+        "fromTrough": 105.7,
+        "peakIdx": 35,
+        "troughIdx": 3
+      }
     },
     {
       "id": "wsts_global_sales",
@@ -497,7 +545,8 @@
       "asOf": null,
       "dir": "flat",
       "history": [],
-      "status": "pending-input"
+      "status": "pending-input",
+      "mom": null
     },
     {
       "id": "dram_contract_price",
@@ -512,37 +561,45 @@
       "asOf": null,
       "dir": "flat",
       "history": [],
-      "status": "pending-input"
+      "status": "pending-input",
+      "mom": null
     }
   ],
   "interpretation": {
-    "regime": "확장 · 가속",
-    "regimeEn": "Expansion",
-    "tone": "pos",
-    "headline": "성장률 지표 2개 중 2개 플러스 · 2개 가속 → 확장 · 가속.",
+    "regime": "확장 · 둔화 조짐",
+    "regimeEn": "Expansion, cooling",
+    "tone": "warn",
+    "headline": "성장지표 2개 중 2개 플러스 · 1개 가속 → 확장 · 둔화 조짐.  ⚠ 꺾임 감시: 한국 반도체 수출(가속 둔화).",
     "bullets": [
       {
         "label": "한국 반도체 수출",
-        "text": "+172.8% YoY · 가속",
-        "state": "확장·가속",
+        "value": 172.8,
+        "unit": "YoY",
+        "phase": "가속 둔화",
+        "tone": "warn",
         "group": "growth"
       },
       {
         "label": "美 반도체 생산",
-        "text": "+14.4% YoY · 가속",
-        "state": "확장·가속",
+        "value": 14.4,
+        "unit": "YoY",
+        "phase": "가속",
+        "tone": "pos",
         "group": "growth"
       },
       {
         "label": "SOX 지수 모멘텀",
-        "text": "+89.0% 3M · 가속",
-        "state": "확장·가속",
+        "value": 89.0,
+        "unit": "3M",
+        "phase": "가속",
+        "tone": "pos",
         "group": "market"
       }
     ],
     "growthCount": 2,
     "growthPositive": 2,
-    "growthRising": 2,
+    "growthRising": 1,
+    "coolingCount": 1,
     "liveCount": 3
   },
   "note": "각 지표는 출처에서 직접 검증 가능. 통합 해석은 점수 합산이 아니라 규칙 기반 국면 판정."

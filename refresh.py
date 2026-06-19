@@ -59,6 +59,57 @@ def _direction(s: pd.Series, lookback: int = 3) -> str:
     return "flat"
 
 
+def _momentum(history: list[dict]) -> dict | None:
+    """증감률 시계열에서 '방향이 꺾였는지/둔화됐는지'를 정밀 판정.
+
+    레벨(현재 증감률)만이 아니라 그 변화(2차 미분)를 본다:
+      mom    = 직전월 대비 변화(%p)  → 가장 빠른 가속/감속 신호
+      slope3 = 3개월 기울기(%p)       → 추세 방향(노이즈 완화)
+      정점/저점 통과 = 최근 창에서 고점/저점 대비 위치·경과개월
+    이 셋으로 5국면(가속/가속 둔화/둔화/저점 통과/침체)을 라벨링한다.
+    'mom<0 인데 slope3>0' = 추세는 상승이나 직전월 꺾임 → 조기 둔화 경보.
+    """
+    vs = [p["v"] for p in history]
+    ts = [p["t"] for p in history]
+    if len(vs) < 4:
+        return None
+    L = vs[-1]
+    m1 = round(L - vs[-2], 1)            # 직전월 대비
+    s3 = round(L - vs[-4], 1)            # 3개월 기울기
+    pk_i = max(range(len(vs)), key=lambda k: vs[k])
+    tr_i = min(range(len(vs)), key=lambda k: vs[k])
+    last = len(vs) - 1
+    eps = 0.5
+    if s3 > eps:
+        if L <= 0:
+            phase, tone = "저점 통과", "warn-pos"
+        elif m1 < -eps:
+            phase, tone = "가속 둔화", "warn"   # 3M↑ 인데 직전월 꺾임 = 조기경보
+        else:
+            phase, tone = "가속", "pos"
+    elif s3 < -eps:
+        phase, tone = ("둔화", "warn") if L > 0 else ("침체", "neg")
+    else:
+        phase, tone = "정체", "neutral"
+    return {
+        "phase": phase,
+        "tone": tone,
+        "level": round(L, 1),
+        "mom": m1,
+        "slope3": s3,
+        "peakValue": round(vs[pk_i], 1),
+        "peakTime": ts[pk_i],
+        "peakAgo": last - pk_i,
+        "fromPeak": round(L - vs[pk_i], 1),
+        "troughValue": round(vs[tr_i], 1),
+        "troughTime": ts[tr_i],
+        "troughAgo": last - tr_i,
+        "fromTrough": round(L - vs[tr_i], 1),
+        "peakIdx": pk_i,
+        "troughIdx": tr_i,
+    }
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # 1) FRED — 美 반도체 생산지수 (IPG3344S), 키 불필요 CSV
 # ─────────────────────────────────────────────────────────────────────────────
@@ -259,49 +310,51 @@ def load_manual() -> list[dict]:
 # ─────────────────────────────────────────────────────────────────────────────
 # 통합 해석 — 규칙 기반 국면 라벨 + 내러티브 (점수 합산 아님)
 # ─────────────────────────────────────────────────────────────────────────────
+RISING_PHASES = {"가속", "저점 통과"}
+COOLING_PHASES = {"가속 둔화", "둔화", "침체"}
+
+
 def interpret(indicators: list[dict]) -> dict:
     growth = [i for i in indicators if i["group"] == "growth" and i.get("value") is not None]
     live = [i for i in indicators if i.get("value") is not None]
 
-    def state(ind: dict) -> str:
-        v, d = ind["value"], ind.get("dir", "flat")
-        rising = d == "up"
-        if v > 0:
-            return "확장·가속" if rising else "확장·둔화"
-        return "회복 신호" if rising else "위축"
+    def phase_of(ind: dict) -> str:
+        return (ind.get("mom") or {}).get("phase", "")
 
-    for ind in live:
-        ind["state"] = state(ind)
-
-    up = sum(1 for i in growth if i["value"] > 0)
-    rising = sum(1 for i in growth if i.get("dir") == "up")
+    up = sum(1 for i in growth if phase_of(i) in RISING_PHASES)
+    pos = sum(1 for i in growth if i["value"] > 0)
+    cooling = [i for i in growth if phase_of(i) in COOLING_PHASES]
     n = len(growth)
 
     if n == 0:
         regime, regimeEn, tone = "데이터 대기", "No data", "neutral"
         headline = "자동 지표 연결 대기 중 — API 키/수동 입력을 채우면 해석이 활성화됩니다."
     else:
-        pos_major = up >= (n + 1) // 2
-        rise_major = rising >= (n + 1) // 2
-        if pos_major and rise_major:
+        pos_major = pos >= (n + 1) // 2
+        rise_major = up >= (n + 1) // 2
+        if pos_major and rise_major and not cooling:
             regime, regimeEn, tone = "확장 · 가속", "Expansion", "pos"
-        elif pos_major and not rise_major:
-            regime, regimeEn, tone = "확장 · 둔화 (후기)", "Late expansion", "warn"
+        elif pos_major and (cooling or not rise_major):
+            regime, regimeEn, tone = "확장 · 둔화 조짐", "Expansion, cooling", "warn"
         elif not pos_major and rise_major:
             regime, regimeEn, tone = "회복 초입", "Early recovery", "warn-pos"
         else:
             regime, regimeEn, tone = "침체", "Contraction", "neg"
-        headline = f"성장률 지표 {n}개 중 {up}개 플러스 · {rising}개 가속 → {regime}."
+        headline = f"성장지표 {n}개 중 {pos}개 플러스 · {up}개 가속 → {regime}."
+        if cooling:
+            tags = ", ".join(f"{c['label']}({phase_of(c)})" for c in cooling)
+            headline += f"  ⚠ 꺾임 감시: {tags}."
 
     bullets = []
     for i in live:
-        sign = "+" if (i["value"] or 0) >= 0 else ""
-        arrow = {"up": "가속", "down": "둔화", "flat": "보합"}[i.get("dir", "flat")]
+        m = i.get("mom") or {}
         bullets.append(
             {
                 "label": i["label"],
-                "text": f"{sign}{i['value']}% {i['unit']} · {arrow}",
-                "state": i.get("state", ""),
+                "value": i["value"],
+                "unit": i["unit"],
+                "phase": m.get("phase", ""),
+                "tone": m.get("tone", "neutral"),
                 "group": i["group"],
             }
         )
@@ -313,8 +366,9 @@ def interpret(indicators: list[dict]) -> dict:
         "headline": headline,
         "bullets": bullets,
         "growthCount": n,
-        "growthPositive": up,
-        "growthRising": rising,
+        "growthPositive": pos,
+        "growthRising": up,
+        "coolingCount": len(cooling),
         "liveCount": len(live),
     }
 
@@ -330,6 +384,8 @@ def main() -> None:
         fetch_sox_momentum(),
         *load_manual(),            # WSTS, DRAM
     ]
+    for ind in indicators:
+        ind["mom"] = _momentum(ind.get("history") or [])
     interpretation = interpret(indicators)
 
     payload = {

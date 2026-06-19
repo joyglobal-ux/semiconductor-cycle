@@ -47,16 +47,19 @@
   .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   @media(max-width:640px){.cards{grid-template-columns:1fr}}
   .card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:16px 17px;
-    display:flex;flex-direction:column;min-height:148px}
-  .card.dim{opacity:.62}
+    display:flex;flex-direction:column;min-height:190px}
+  .card.dim{opacity:.6}
   .card .crole{font-size:11px;color:var(--faint);font-weight:600}
   .card h3{font-size:15.5px;font-weight:800;margin:3px 0 0;letter-spacing:-.2px}
-  .card .val{display:flex;align-items:baseline;gap:8px;margin-top:11px}
-  .card .num{font-size:30px;font-weight:800;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+  .card .val{display:flex;align-items:center;gap:8px;margin-top:11px}
+  .card .num{font-size:30px;font-weight:800;letter-spacing:-1px;font-variant-numeric:tabular-nums;line-height:1}
   .card .unit{font-size:12px;color:var(--faint);font-weight:700}
-  .card .dir{font-size:12.5px;font-weight:700;margin-top:2px}
+  .card .phase{font-size:11.5px;font-weight:800;padding:4px 10px;border-radius:8px;
+    margin-left:auto;align-self:center;letter-spacing:-.1px;white-space:nowrap}
+  .card .mom{font-size:11.5px;color:var(--muted);margin-top:8px;font-variant-numeric:tabular-nums;letter-spacing:-.1px}
+  .card .mom b{font-weight:800}
   .card .spark{margin-top:auto;padding-top:12px}
-  .card canvas{width:100%;height:38px;display:block}
+  .card canvas{width:100%;height:56px;display:block}
   .card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:11px;
     font-size:11px;color:var(--faint)}
   .card .src:hover{color:var(--accent)}
@@ -111,11 +114,6 @@
     neg:      {c:'var(--stop)',   bg:'rgba(239,68,68,.13)'},
     neutral:  {c:'var(--muted)',  bg:'var(--panel2)'}
   };
-  var DIR = {
-    up:  {t:'▲ 가속', c:'var(--go)'},
-    down:{t:'▼ 둔화', c:'var(--stop)'},
-    flat:{t:'▶ 보합', c:'var(--muted)'}
-  };
   var STATUS = {
     'auto':         {t:'자동', cls:'b-auto'},
     'manual':       {t:'수동', cls:'b-manual'},
@@ -126,6 +124,8 @@
 
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function fmt(v){ return (v>=0?'+':'') + v; }
+  function sp(x){ return (x>=0?'+':'') + x.toFixed(1); }
+  function dcol(x){ return x>0.3?'var(--go)':(x<-0.3?'var(--stop)':'var(--muted)'); }
 
   // ── 갱신 시각
   var g = D.generatedAt || '';
@@ -134,8 +134,9 @@
   // ── 통합 해석
   var iv = D.interpretation, tone = TONE[iv.tone] || TONE.neutral;
   var chips = iv.bullets.map(function(b){
-    var st = b.state ? '<span class="st" style="color:'+tone.c+';background:'+tone.bg+'">'+esc(b.state)+'</span>' : '';
-    return '<span class="chip"><b>'+esc(b.label)+'</b> '+esc(b.text)+' '+st+'</span>';
+    var bt = TONE[b.tone] || TONE.neutral;
+    var ph = b.phase ? '<span class="st" style="color:'+bt.c+';background:'+bt.bg+'">'+esc(b.phase)+'</span>' : '';
+    return '<span class="chip"><b>'+esc(b.label)+'</b> '+fmt(b.value)+'% '+esc(b.unit)+' '+ph+'</span>';
   }).join('');
   document.getElementById('verdict').innerHTML =
     '<div class="verdict">'+
@@ -156,10 +157,21 @@
     if(i.value===null){
       valBlock = '<div class="pend">—</div>';
     }else{
-      var d = DIR[i.dir]||DIR.flat;
+      var m = i.mom, phaseChip = '', momLine = '';
+      if(m){
+        var mt = TONE[m.tone] || TONE.neutral;
+        phaseChip = '<span class="phase" style="color:'+mt.c+';background:'+mt.bg+'">'+esc(m.phase)+'</span>';
+        var ref = (m.level >= 0)
+          ? '정점 '+esc(m.peakTime)+' 대비 <b style="color:'+dcol(m.fromPeak)+'">'+sp(m.fromPeak)+'%p</b>'
+          : '저점 '+esc(m.troughTime)+' 대비 <b style="color:'+dcol(m.fromTrough)+'">'+sp(m.fromTrough)+'%p</b>';
+        momLine =
+          '<div class="mom">직전월 <b style="color:'+dcol(m.mom)+'">'+sp(m.mom)+'%p</b>'+
+          ' · 3M <b style="color:'+dcol(m.slope3)+'">'+sp(m.slope3)+'%p</b>'+
+          ' · '+ref+'</div>';
+      }
       valBlock =
-        '<div class="val"><span class="num">'+fmt(i.value)+'</span><span class="unit">% '+esc(i.unit)+'</span></div>'+
-        '<div class="dir" style="color:'+d.c+'">'+d.t+'</div>';
+        '<div class="val"><span class="num">'+fmt(i.value)+'</span><span class="unit">% '+esc(i.unit)+'</span>'+phaseChip+'</div>'+
+        momLine;
     }
     var canvasId = 'sp_'+i.id;
     return '<div class="card'+dim+'">'+
@@ -179,40 +191,50 @@
   document.getElementById('growth').innerHTML = growth.map(card).join('');
   document.getElementById('market').innerHTML = market.map(card).join('');
 
-  // ── 스파크라인
+  // ── 차트: 0선(점선) · 중립 본선 · 정점 금색 링 · 마지막 구간 방향색 · 끝점
   function spark(i){
     var cv = document.getElementById('sp_'+i.id);
     if(!cv || !i.history || i.history.length<2) return;
-    var dpr = window.devicePixelRatio||1, w = cv.clientWidth, h = 38;
+    var m = i.mom || {};
+    var dpr = window.devicePixelRatio||1, w = cv.clientWidth, h = 56;
     cv.width = w*dpr; cv.height = h*dpr;
     var ctx = cv.getContext('2d'); ctx.scale(dpr,dpr);
     var vs = i.history.map(function(p){return p.v;});
     var min = Math.min.apply(null,vs), max = Math.max.apply(null,vs);
     var lo = Math.min(min,0), hi = Math.max(max,0), rng = (hi-lo)||1;
-    var col = (i.dir==='down')?'#ef4444':(i.dir==='up'?'#22c55e':'#9aa3b2');
-    function X(k){return (k/(vs.length-1))*(w-2)+1;}
-    function Y(v){return h-2 - ((v-lo)/rng)*(h-4);}
-    // 0선
-    if(lo<0 && hi>0){ ctx.strokeStyle='#272d3c'; ctx.lineWidth=1; ctx.beginPath();
-      ctx.moveTo(0,Y(0)); ctx.lineTo(w,Y(0)); ctx.stroke(); }
-    // 영역
+    var pT=7, pB=5, pR=3;
+    function X(k){return (k/(vs.length-1))*(w-2-pR)+1;}
+    function Y(v){return h-pB - ((v-lo)/rng)*(h-pT-pB);}
+    var last = vs.length-1;
+    var turn = (m.mom>0.3)?'#22c55e':(m.mom<-0.3?'#ef4444':'#9aa3b2');  // 직전월 방향
+    // 0선 (점선)
+    if(lo<0 && hi>0){ ctx.save(); ctx.strokeStyle='#3a4254'; ctx.lineWidth=1; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.moveTo(0,Y(0)); ctx.lineTo(w,Y(0)); ctx.stroke(); ctx.restore(); }
+    // 본선 (중립) + 영역
     ctx.beginPath(); ctx.moveTo(X(0),Y(vs[0]));
     for(var k=1;k<vs.length;k++) ctx.lineTo(X(k),Y(vs[k]));
-    ctx.strokeStyle=col; ctx.lineWidth=1.6; ctx.lineJoin='round'; ctx.stroke();
-    ctx.lineTo(X(vs.length-1),h); ctx.lineTo(X(0),h); ctx.closePath();
-    ctx.globalAlpha=.10; ctx.fillStyle=col; ctx.fill(); ctx.globalAlpha=1;
+    ctx.strokeStyle='#5b6bd6'; ctx.lineWidth=1.5; ctx.lineJoin='round'; ctx.stroke();
+    ctx.lineTo(X(last),Y(lo)); ctx.lineTo(X(0),Y(lo)); ctx.closePath();
+    ctx.globalAlpha=.07; ctx.fillStyle='#5b6bd6'; ctx.fill(); ctx.globalAlpha=1;
+    // 마지막 구간 (직전월 방향색, 굵게)
+    if(last>=1){ ctx.beginPath(); ctx.moveTo(X(last-1),Y(vs[last-1])); ctx.lineTo(X(last),Y(vs[last]));
+      ctx.strokeStyle=turn; ctx.lineWidth=2.6; ctx.lineCap='round'; ctx.stroke(); }
+    // 정점 링 (금색) — 끝점과 겹치면 '신고점' 의미
+    if(m.peakIdx!=null){ ctx.beginPath(); ctx.arc(X(m.peakIdx),Y(vs[m.peakIdx]),3.2,0,7);
+      ctx.strokeStyle='#ffd66b'; ctx.lineWidth=1.6; ctx.stroke(); }
     // 끝점
-    ctx.beginPath(); ctx.arc(X(vs.length-1),Y(vs[vs.length-1]),2.4,0,7); ctx.fillStyle=col; ctx.fill();
+    ctx.beginPath(); ctx.arc(X(last),Y(vs[last]),2.8,0,7); ctx.fillStyle=turn; ctx.fill();
   }
   D.indicators.forEach(spark);
   window.addEventListener('resize', function(){ D.indicators.forEach(spark); });
 
   document.getElementById('note').innerHTML =
-    '<b>읽는 법.</b> 각 카드는 해당 출처에서 직접 검증 가능한 원수치입니다. 상단 통합 해석은 점수 합산이 아니라 '+
-    '규칙 기반 국면 판정(플러스/가속 다수결 + 선행지표 방향)입니다. 반도체는 사이클 산업이라 '+
-    '<b>레벨보다 방향(가속·둔화)</b>이 매매 신호에 가깝습니다.<br>'+
-    '<b>데이터.</b> 자동(FRED·SOX)은 매일/월초 자동 갱신. <b>한국 수출</b>은 ECOS 무료 키 연결 시, '+
-    '<b>WSTS·DRAM</b>은 manual.json 월 1회 입력 시 활성화됩니다. · '+esc(D.note||'');
+    '<b>읽는 법.</b> 핵심은 <b>레벨이 아니라 방향</b>입니다. <b>국면 칩</b> = 빠른 판정, '+
+    '<b>직전월 Δ</b>(가장 빠른 신호) · <b>3M 기울기</b>(추세) · <b>정점 대비</b>(꺾였는지) = 정밀 수치. '+
+    '<b>“가속 둔화”</b>는 3M는 상승인데 직전월이 꺾인 <b>조기 경보</b>입니다.<br>'+
+    '<b>차트.</b> 점선=0선, <span style="color:var(--gold)">금색 링</span>=최근 정점, '+
+    '<span style="color:var(--go)">초록</span>/<span style="color:var(--stop)">빨강</span> 끝구간=직전월 방향(링과 끝점이 겹치면 신고점).<br>'+
+    '<b>데이터.</b> 한국수출·FRED·SOX 자동 갱신, WSTS·DRAM은 월 1회 수동. 상단 해석은 점수 합산이 아닌 규칙 기반 국면 판정. · '+esc(D.note||'');
 })();
 </script>
 </body>
