@@ -173,21 +173,22 @@ def fetch_kr_semi_exports() -> dict:
     if not key:
         _log("  - 한국 수출: ECOS_API_KEY 없음 → pending-key (1분이면 무료 발급)")
         return base
-    # ECOS StatisticSearch. STAT_CODE/ITEM 은 키 발급 후 StatisticTableList 로
-    # '반도체 수출' 항목을 확인해 채운다(아래 값은 자리표시이며 첫 키 실행 때 확정).
-    stat_code = os.environ.get("ECOS_SEMI_STAT", "")  # 예: 관세청 통관 수출 통계표
-    item_code = os.environ.get("ECOS_SEMI_ITEM", "")
-    if not stat_code:
-        _log("  - 한국 수출: ECOS_SEMI_STAT 미설정 → pending-key")
-        return base
+    # 확정 시리즈: 403Y001 수출금액지수(2020=100) / 30911AA '반도체' (월별).
+    # 금액지수의 전년동월비 = 반도체 수출액 명목 증감률. (env 로 override 가능)
+    stat_code = os.environ.get("ECOS_SEMI_STAT") or "403Y001"
+    item_code = os.environ.get("ECOS_SEMI_ITEM") or "30911AA"
+    base["source"] = "한국은행 ECOS · 수출금액지수(반도체)"
     try:
         url = (
-            f"https://ecos.bok.or.kr/api/StatisticSearch/{key}/json/kr/1/200/"
+            f"https://ecos.bok.or.kr/api/StatisticSearch/{key}/json/kr/1/1000/"
             f"{stat_code}/M/200001/209912/{item_code}"
         )
         r = requests.get(url, timeout=30)
         r.raise_for_status()
-        rows = r.json()["StatisticSearch"]["row"]
+        payload = r.json()
+        if "StatisticSearch" not in payload:
+            raise RuntimeError(payload.get("RESULT", payload))
+        rows = payload["StatisticSearch"]["row"]
         df = pd.DataFrame(rows)
         df["t"] = pd.to_datetime(df["TIME"], format="%Y%m")
         df = df.set_index("t").sort_index()

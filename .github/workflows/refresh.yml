@@ -28,7 +28,8 @@ jobs:
 
       - name: Collect indicators
         env:
-          # 한국 수출 자동화를 켜려면 repo Secrets 에 ECOS_API_KEY (+ STAT/ITEM) 추가
+          # 한국 수출 자동화: repo Secrets 의 ECOS_API_KEY 만 있으면 동작.
+          # 시리즈는 코드 기본값(403Y001/30911AA). 바꾸려면 STAT/ITEM secret 추가.
           ECOS_API_KEY: ${{ secrets.ECOS_API_KEY }}
           ECOS_SEMI_STAT: ${{ secrets.ECOS_SEMI_STAT }}
           ECOS_SEMI_ITEM: ${{ secrets.ECOS_SEMI_ITEM }}
