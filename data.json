@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-19T23:44:12+00:00",
+  "generatedAt": "2026-06-19T23:52:24+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -569,7 +569,7 @@
     "regime": "확장 · 둔화 조짐",
     "regimeEn": "Expansion, cooling",
     "tone": "warn",
-    "headline": "성장지표 2개 중 2개 플러스 · 1개 가속 → 확장 · 둔화 조짐.  ⚠ 꺾임 감시: 한국 반도체 수출(가속 둔화).",
+    "headline": "성장지표 4개 중 라이브 2개 — 2개 플러스 · 1개 가속 → 확장 · 둔화 조짐.  ⚠ 꺾임 감시: 한국 반도체 수출(가속 둔화).",
     "bullets": [
       {
         "label": "한국 반도체 수출",
@@ -596,10 +596,17 @@
         "group": "market"
       }
     ],
-    "growthCount": 2,
+    "growthTotal": 4,
+    "growthLive": 2,
     "growthPositive": 2,
     "growthRising": 1,
+    "marketLive": 1,
     "coolingCount": 1,
+    "pendingCount": 2,
+    "pendingNames": [
+      "WSTS 글로벌 매출",
+      "DRAM 고정거래가"
+    ],
     "liveCount": 3
   },
   "note": "각 지표는 출처에서 직접 검증 가능. 통합 해석은 점수 합산이 아니라 규칙 기반 국면 판정."

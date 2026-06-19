@@ -315,8 +315,11 @@ COOLING_PHASES = {"가속 둔화", "둔화", "침체"}
 
 
 def interpret(indicators: list[dict]) -> dict:
-    growth = [i for i in indicators if i["group"] == "growth" and i.get("value") is not None]
+    growth_all = [i for i in indicators if i["group"] == "growth"]
+    growth = [i for i in growth_all if i.get("value") is not None]
+    market = [i for i in indicators if i["group"] == "market" and i.get("value") is not None]
     live = [i for i in indicators if i.get("value") is not None]
+    pending = [i for i in indicators if i.get("value") is None]
 
     def phase_of(ind: dict) -> str:
         return (ind.get("mom") or {}).get("phase", "")
@@ -340,7 +343,7 @@ def interpret(indicators: list[dict]) -> dict:
             regime, regimeEn, tone = "회복 초입", "Early recovery", "warn-pos"
         else:
             regime, regimeEn, tone = "침체", "Contraction", "neg"
-        headline = f"성장지표 {n}개 중 {pos}개 플러스 · {up}개 가속 → {regime}."
+        headline = f"성장지표 {len(growth_all)}개 중 라이브 {n}개 — {pos}개 플러스 · {up}개 가속 → {regime}."
         if cooling:
             tags = ", ".join(f"{c['label']}({phase_of(c)})" for c in cooling)
             headline += f"  ⚠ 꺾임 감시: {tags}."
@@ -365,10 +368,14 @@ def interpret(indicators: list[dict]) -> dict:
         "tone": tone,
         "headline": headline,
         "bullets": bullets,
-        "growthCount": n,
+        "growthTotal": len(growth_all),
+        "growthLive": n,
         "growthPositive": pos,
         "growthRising": up,
+        "marketLive": len(market),
         "coolingCount": len(cooling),
+        "pendingCount": len(pending),
+        "pendingNames": [p["label"] for p in pending],
         "liveCount": len(live),
     }
 

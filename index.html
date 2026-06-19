@@ -101,9 +101,9 @@
   <div class="foot-note" id="note"></div>
 </div>
 
-<script src="data.js"></script>
 <script>
 (function(){
+  function render(){
   var D = window.SEMI_DATA;
   if(!D){ document.getElementById('updated').textContent = 'data.js 로드 실패 — refresh.py를 먼저 실행하세요.'; return; }
 
@@ -143,7 +143,8 @@
       '<div class="vtop">'+
         '<span class="regime" style="color:'+tone.c+';background:'+tone.bg+'">'+esc(iv.regime)+
           '<span class="en">'+esc(iv.regimeEn)+'</span></span>'+
-        '<span class="tally">성장지표 '+iv.growthPositive+'/'+iv.growthCount+' 플러스 · '+iv.growthRising+' 가속 · 라이브 '+iv.liveCount+'</span>'+
+        '<span class="tally">성장 '+iv.growthLive+'/'+iv.growthTotal+' 라이브 · 시장 '+iv.marketLive+
+          (iv.pendingCount?' · 대기 '+iv.pendingCount+'('+esc((iv.pendingNames||[]).join('·'))+')':'')+'</span>'+
       '</div>'+
       '<div class="headline">'+esc(iv.headline)+'</div>'+
       (chips?'<div class="bullets">'+chips+'</div>':'')+
@@ -235,6 +236,13 @@
     '<b>차트.</b> 점선=0선, <span style="color:var(--gold)">금색 링</span>=최근 정점, '+
     '<span style="color:var(--go)">초록</span>/<span style="color:var(--stop)">빨강</span> 끝구간=직전월 방향(링과 끝점이 겹치면 신고점).<br>'+
     '<b>데이터.</b> 한국수출·FRED·SOX 자동 갱신, WSTS·DRAM은 월 1회 수동. 상단 해석은 점수 합산이 아닌 규칙 기반 국면 판정. · '+esc(D.note||'');
+  }
+  // data.js 를 매 로드마다 새로 받아 index.html 과 항상 동기화 (캐시 불일치 방지)
+  var s = document.createElement('script');
+  s.src = 'data.js?ts=' + Date.now();
+  s.onload = render;
+  s.onerror = function(){ var u = document.getElementById('updated'); if(u) u.textContent = 'data.js 로드 실패'; };
+  document.head.appendChild(s);
 })();
 </script>
 </body>
