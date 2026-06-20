@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-19T23:52:24+00:00",
+  "generatedAt": "2026-06-20T00:01:08+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -541,35 +541,94 @@
       "role": "업계 공식 기준점",
       "source": "WSTS / SIA 월간 보도자료",
       "sourceUrl": "https://www.semiconductors.org/category/news/global-sales-report/",
-      "value": null,
-      "asOf": null,
-      "dir": "flat",
-      "history": [],
-      "status": "pending-input",
-      "mom": null
+      "value": 93.9,
+      "asOf": "2026-04",
+      "dir": "up",
+      "history": [
+        {
+          "t": "2026-02",
+          "v": 61.8
+        },
+        {
+          "t": "2026-03",
+          "v": 79.2
+        },
+        {
+          "t": "2026-04",
+          "v": 93.9
+        }
+      ],
+      "status": "manual",
+      "mom": {
+        "phase": "가속",
+        "tone": "pos",
+        "level": 93.9,
+        "mom": 14.7,
+        "slope3": 32.1,
+        "peakValue": 93.9,
+        "peakTime": "2026-04",
+        "peakAgo": 0,
+        "fromPeak": 0.0,
+        "troughValue": 61.8,
+        "troughTime": "2026-02",
+        "troughAgo": 2,
+        "fromTrough": 32.1,
+        "peakIdx": 2,
+        "troughIdx": 0
+      }
     },
     {
       "id": "dram_contract_price",
       "label": "DRAM 고정거래가",
       "labelEn": "DRAM contract price",
-      "unit": "MoM",
+      "unit": "QoQ",
+      "period": "Q",
       "group": "growth",
       "role": "메모리 사이클 (삼성·하이닉스 직결)",
-      "source": "TrendForce",
-      "sourceUrl": "https://www.trendforce.com/price",
-      "value": null,
-      "asOf": null,
-      "dir": "flat",
-      "history": [],
-      "status": "pending-input",
-      "mom": null
+      "source": "TrendForce · 계약가 QoQ",
+      "sourceUrl": "https://www.trendforce.com/price/dram",
+      "value": 60,
+      "asOf": "2026-Q2",
+      "dir": "down",
+      "history": [
+        {
+          "t": "2025-Q4",
+          "v": 47
+        },
+        {
+          "t": "2026-Q1",
+          "v": 92
+        },
+        {
+          "t": "2026-Q2",
+          "v": 60
+        }
+      ],
+      "status": "manual",
+      "mom": {
+        "phase": "가속 둔화",
+        "tone": "warn",
+        "level": 60,
+        "mom": -32,
+        "slope3": 13,
+        "peakValue": 92,
+        "peakTime": "2026-Q1",
+        "peakAgo": 1,
+        "fromPeak": -32,
+        "troughValue": 47,
+        "troughTime": "2025-Q4",
+        "troughAgo": 2,
+        "fromTrough": 13,
+        "peakIdx": 1,
+        "troughIdx": 0
+      }
     }
   ],
   "interpretation": {
     "regime": "확장 · 둔화 조짐",
     "regimeEn": "Expansion, cooling",
     "tone": "warn",
-    "headline": "성장지표 4개 중 라이브 2개 — 2개 플러스 · 1개 가속 → 확장 · 둔화 조짐.  ⚠ 꺾임 감시: 한국 반도체 수출(가속 둔화).",
+    "headline": "성장지표 4개 중 라이브 4개 — 4개 플러스 · 2개 가속 → 확장 · 둔화 조짐.  ⚠ 꺾임 감시: 한국 반도체 수출(가속 둔화), DRAM 고정거래가(가속 둔화).",
     "bullets": [
       {
         "label": "한국 반도체 수출",
@@ -594,20 +653,33 @@
         "phase": "가속",
         "tone": "pos",
         "group": "market"
+      },
+      {
+        "label": "WSTS 글로벌 매출",
+        "value": 93.9,
+        "unit": "YoY",
+        "phase": "가속",
+        "tone": "pos",
+        "group": "growth"
+      },
+      {
+        "label": "DRAM 고정거래가",
+        "value": 60,
+        "unit": "QoQ",
+        "phase": "가속 둔화",
+        "tone": "warn",
+        "group": "growth"
       }
     ],
     "growthTotal": 4,
-    "growthLive": 2,
-    "growthPositive": 2,
-    "growthRising": 1,
+    "growthLive": 4,
+    "growthPositive": 4,
+    "growthRising": 2,
     "marketLive": 1,
-    "coolingCount": 1,
-    "pendingCount": 2,
-    "pendingNames": [
-      "WSTS 글로벌 매출",
-      "DRAM 고정거래가"
-    ],
-    "liveCount": 3
+    "coolingCount": 2,
+    "pendingCount": 0,
+    "pendingNames": [],
+    "liveCount": 5
   },
   "note": "각 지표는 출처에서 직접 검증 가능. 통합 해석은 점수 합산이 아니라 규칙 기반 국면 판정."
 }

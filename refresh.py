@@ -71,11 +71,11 @@ def _momentum(history: list[dict]) -> dict | None:
     """
     vs = [p["v"] for p in history]
     ts = [p["t"] for p in history]
-    if len(vs) < 4:
+    if len(vs) < 3:
         return None
     L = vs[-1]
-    m1 = round(L - vs[-2], 1)            # 직전월 대비
-    s3 = round(L - vs[-4], 1)            # 3개월 기울기
+    m1 = round(L - vs[-2], 1)                    # 직전치 대비
+    s3 = round(L - vs[-min(4, len(vs))], 1)      # 최근 3구간 기울기
     pk_i = max(range(len(vs)), key=lambda k: vs[k])
     tr_i = min(range(len(vs)), key=lambda k: vs[k])
     last = len(vs) - 1
@@ -275,11 +275,12 @@ MANUAL_DEFS = {
     "dram_contract_price": {
         "label": "DRAM 고정거래가",
         "labelEn": "DRAM contract price",
-        "unit": "MoM",
+        "unit": "QoQ",
+        "period": "Q",
         "group": "growth",
         "role": "메모리 사이클 (삼성·하이닉스 직결)",
-        "source": "TrendForce",
-        "sourceUrl": "https://www.trendforce.com/price",
+        "source": "TrendForce · 계약가 QoQ",
+        "sourceUrl": "https://www.trendforce.com/price/dram",
     },
 }
 

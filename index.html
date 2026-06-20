@@ -165,9 +165,10 @@
         var ref = (m.level >= 0)
           ? '정점 '+esc(m.peakTime)+' 대비 <b style="color:'+dcol(m.fromPeak)+'">'+sp(m.fromPeak)+'%p</b>'
           : '저점 '+esc(m.troughTime)+' 대비 <b style="color:'+dcol(m.fromTrough)+'">'+sp(m.fromTrough)+'%p</b>';
+        var pL = (i.period==='Q') ? {s:'직전분기', t:'3분기'} : {s:'직전월', t:'3M'};
         momLine =
-          '<div class="mom">직전월 <b style="color:'+dcol(m.mom)+'">'+sp(m.mom)+'%p</b>'+
-          ' · 3M <b style="color:'+dcol(m.slope3)+'">'+sp(m.slope3)+'%p</b>'+
+          '<div class="mom">'+pL.s+' <b style="color:'+dcol(m.mom)+'">'+sp(m.mom)+'%p</b>'+
+          ' · '+pL.t+' <b style="color:'+dcol(m.slope3)+'">'+sp(m.slope3)+'%p</b>'+
           ' · '+ref+'</div>';
       }
       valBlock =
