@@ -11,11 +11,15 @@
 
 | 지표 | 출처 | 단위 | 자동화 |
 |---|---|---|---|
-| 한국 반도체 수출 | 한국은행 ECOS / 관세청 | YoY | 무료 키 필요 |
+| 한국 반도체 수출 | ECOS 수출금액지수(반도체) 403Y001/30911AA | YoY | ✅ 자동(키) |
+| DRAM 수출물가 | ECOS 수출물가지수(DRAM) 402Y016/30911201AA | MoM | ✅ 자동(키) |
 | 美 반도체 생산 (IPG3344S) | FRED | YoY | ✅ 키 불필요 |
 | SOX 지수 모멘텀 | PHLX ^SOX (yfinance) | 3M | ✅ 키 불필요 |
-| WSTS 글로벌 매출 | WSTS / SIA 보도자료 | YoY | 월 1회 수동 |
-| DRAM 고정거래가 | TrendForce | QoQ | 분기 1회 수동 |
+| WSTS 글로벌 매출 | WSTS / SIA 보도자료 | YoY | 월 1회 수동(스케줄 루틴 wsts-monthly-update가 매월 9일 자동 갱신) |
+
+DRAM 은 분기 계약가(TrendForce, 느림) 대신 **ECOS 월별 DRAM 수출물가 MoM** 으로 받는다 —
+가격이 꺾이는 순간을 가장 빨리 잡는 신호. WSTS 만 수동이며, 매월 9일 스케줄 루틴이
+SIA 발표치를 검색해 `manual.json` 을 갱신한다.
 
 ## 실행
 
