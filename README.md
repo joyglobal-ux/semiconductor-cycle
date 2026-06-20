@@ -15,7 +15,7 @@
 | 美 반도체 생산 (IPG3344S) | FRED | YoY | ✅ 키 불필요 |
 | SOX 지수 모멘텀 | PHLX ^SOX (yfinance) | 3M | ✅ 키 불필요 |
 | WSTS 글로벌 매출 | WSTS / SIA 보도자료 | YoY | 월 1회 수동 |
-| DRAM 고정거래가 | TrendForce | MoM | 월 1회 수동 |
+| DRAM 고정거래가 | TrendForce | QoQ | 분기 1회 수동 |
 
 ## 실행
 
@@ -49,9 +49,15 @@ uv run python refresh.py
 `manual.json` 의 `value` / `asOf` / `dir` 만 채우면 카드가 켜진다. **숫자를 지어내지
 말고** 출처(SIA 보도자료·TrendForce) 확인 후 입력한다.
 
+`history`(연속 3개 이상)를 채우면 국면 칩·차트·정밀 수치까지 표시된다. `value` 는
+`history` 의 마지막 값과 일치시킨다.
+
 ```json
-{ "wsts_global_sales": { "value": 19.0, "asOf": "2026-04", "dir": "up" } }
+{ "wsts_global_sales": { "value": 93.9, "asOf": "2026-04",
+    "history": [{"t":"2026-02","v":61.8},{"t":"2026-03","v":79.2},{"t":"2026-04","v":93.9}] } }
 ```
+
+갱신 주기: WSTS 는 월 1회(SIA 보도자료, 매월 초), DRAM 은 분기 1회(TrendForce 계약가).
 
 ## 자동 갱신
 
