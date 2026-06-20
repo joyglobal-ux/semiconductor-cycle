@@ -201,10 +201,53 @@ def fetch_sox_momentum() -> dict:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# 3) 한국 반도체 수출 — 한은 ECOS (무료 키 필요: 환경변수 ECOS_API_KEY)
-#    선행지표·핵심. 키가 없으면 pending-key 상태로 자리만 잡는다.
+# 3) 한국 반도체 수출 + DRAM 수출물가 — 한은 ECOS (무료 키: 환경변수 ECOS_API_KEY)
+#    월별·자동. 키가 없으면 pending-key 상태로 자리만 잡는다.
 # ─────────────────────────────────────────────────────────────────────────────
+def _ecos_series(key: str, stat: str, item: str) -> pd.Series:
+    """ECOS 월별 인덱스(레벨) 시계열을 받아 정렬·중복제거해 반환."""
+    url = (
+        f"https://ecos.bok.or.kr/api/StatisticSearch/{key}/json/kr/1/1000/"
+        f"{stat}/M/200001/209912/{item}"
+    )
+    r = requests.get(url, timeout=30)
+    r.raise_for_status()
+    payload = r.json()
+    if "StatisticSearch" not in payload:
+        raise RuntimeError(payload.get("RESULT", payload))
+    rows = payload["StatisticSearch"]["row"]
+    df = pd.DataFrame(rows)
+    # 일부 표(예: 402Y016)는 TIME당 중복 행을 반환 → pct_change 가 어긋나므로 dedup 필수.
+    df = df.drop_duplicates(subset="TIME", keep="last")
+    df["t"] = pd.to_datetime(df["TIME"], format="%Y%m")
+    df = df.set_index("t").sort_index()
+    return pd.to_numeric(df["DATA_VALUE"], errors="coerce").dropna()
+
+
+def _fill_from_ecos(base: dict, stat: str, item: str, log_name: str, mode: str = "yoy") -> dict:
+    key = os.environ.get("ECOS_API_KEY")
+    if not key:
+        _log(f"  - {log_name}: ECOS_API_KEY 없음 → pending-key")
+        return base
+    try:
+        s = _ecos_series(key, stat, item)
+        chg = (s.pct_change(1) * 100).dropna() if mode == "mom" else _yoy_from_monthly(s)
+        base.update(
+            value=round(float(chg.iloc[-1]), 1),
+            asOf=chg.index[-1].strftime("%Y-%m"),
+            dir=_direction(chg),
+            history=_history(chg),
+            status="auto",
+        )
+        _log(f"  {log_name}: {base['value']}% {base.get('unit','')} ({base['asOf']})")
+    except Exception as e:  # noqa: BLE001
+        _log(f"  ! {log_name} ECOS 실패: {e} → pending-key 유지")
+    return base
+
+
 def fetch_kr_semi_exports() -> dict:
+    # 확정 시리즈: 403Y001 수출금액지수(2020=100) / 30911AA '반도체' (월별).
+    # 금액지수의 전년동월비 = 반도체 수출액 명목 증감률. (env 로 override 가능)
     base = {
         "id": "kr_semi_exports",
         "label": "한국 반도체 수출",
@@ -212,50 +255,33 @@ def fetch_kr_semi_exports() -> dict:
         "unit": "YoY",
         "group": "growth",
         "role": "선행지표 · 글로벌 수요 벨웨더",
-        "source": "한국은행 ECOS",
+        "source": "한국은행 ECOS · 수출금액지수(반도체)",
         "sourceUrl": "https://ecos.bok.or.kr/",
         "status": "pending-key",
-        "value": None,
-        "asOf": None,
-        "dir": "flat",
-        "history": [],
+        "value": None, "asOf": None, "dir": "flat", "history": [],
     }
-    key = os.environ.get("ECOS_API_KEY")
-    if not key:
-        _log("  - 한국 수출: ECOS_API_KEY 없음 → pending-key (1분이면 무료 발급)")
-        return base
-    # 확정 시리즈: 403Y001 수출금액지수(2020=100) / 30911AA '반도체' (월별).
-    # 금액지수의 전년동월비 = 반도체 수출액 명목 증감률. (env 로 override 가능)
-    stat_code = os.environ.get("ECOS_SEMI_STAT") or "403Y001"
-    item_code = os.environ.get("ECOS_SEMI_ITEM") or "30911AA"
-    base["source"] = "한국은행 ECOS · 수출금액지수(반도체)"
-    try:
-        url = (
-            f"https://ecos.bok.or.kr/api/StatisticSearch/{key}/json/kr/1/1000/"
-            f"{stat_code}/M/200001/209912/{item_code}"
-        )
-        r = requests.get(url, timeout=30)
-        r.raise_for_status()
-        payload = r.json()
-        if "StatisticSearch" not in payload:
-            raise RuntimeError(payload.get("RESULT", payload))
-        rows = payload["StatisticSearch"]["row"]
-        df = pd.DataFrame(rows)
-        df["t"] = pd.to_datetime(df["TIME"], format="%Y%m")
-        df = df.set_index("t").sort_index()
-        s = pd.to_numeric(df["DATA_VALUE"], errors="coerce").dropna()
-        yoy = _yoy_from_monthly(s)
-        base.update(
-            value=round(float(yoy.iloc[-1]), 1),
-            asOf=yoy.index[-1].strftime("%Y-%m"),
-            dir=_direction(yoy),
-            history=_history(yoy),
-            status="auto",
-        )
-        _log(f"  한국 수출: {base['value']}% YoY ({base['asOf']})")
-    except Exception as e:  # noqa: BLE001
-        _log(f"  ! ECOS 실패: {e} → pending-key 유지")
-    return base
+    stat = os.environ.get("ECOS_SEMI_STAT") or "403Y001"
+    item = os.environ.get("ECOS_SEMI_ITEM") or "30911AA"
+    return _fill_from_ecos(base, stat, item, "한국 수출")
+
+
+def fetch_dram_price() -> dict:
+    # 402Y016 수출물가지수(2020=100) / 30911201AA 'DRAM' (월별). 분기 계약가 대신
+    # 월별 자동 갱신. MoM(월별 가격변화) = 가장 빠른 DRAM 가격 신호 — 가격이 꺾이는
+    # 순간을 즉시 포착(예: 4월 +25% → 5월 +7.6%).
+    base = {
+        "id": "dram_price",
+        "label": "DRAM 수출물가",
+        "labelEn": "DRAM export price",
+        "unit": "MoM",
+        "group": "growth",
+        "role": "메모리 가격 사이클 (삼성·하이닉스 직결)",
+        "source": "한국은행 ECOS · 수출물가지수(DRAM)",
+        "sourceUrl": "https://ecos.bok.or.kr/",
+        "status": "pending-key",
+        "value": None, "asOf": None, "dir": "flat", "history": [],
+    }
+    return _fill_from_ecos(base, "402Y016", "30911201AA", "DRAM 수출물가", mode="mom")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -271,16 +297,6 @@ MANUAL_DEFS = {
         "role": "업계 공식 기준점",
         "source": "WSTS / SIA 월간 보도자료",
         "sourceUrl": "https://www.semiconductors.org/category/news/global-sales-report/",
-    },
-    "dram_contract_price": {
-        "label": "DRAM 고정거래가",
-        "labelEn": "DRAM contract price",
-        "unit": "QoQ",
-        "period": "Q",
-        "group": "growth",
-        "role": "메모리 사이클 (삼성·하이닉스 직결)",
-        "source": "TrendForce · 계약가 QoQ",
-        "sourceUrl": "https://www.trendforce.com/price/dram",
     },
 }
 
@@ -387,10 +403,11 @@ def interpret(indicators: list[dict]) -> dict:
 def main() -> None:
     _log("=== 반도체 사이클 데이터 수집 ===")
     indicators = [
-        fetch_kr_semi_exports(),   # 선행 (pending-key 가능)
+        fetch_kr_semi_exports(),   # 선행 (ECOS)
+        fetch_dram_price(),        # DRAM 월별 가격 (ECOS)
         fetch_fred_semi_production(),
         fetch_sox_momentum(),
-        *load_manual(),            # WSTS, DRAM
+        *load_manual(),            # WSTS (수동)
     ]
     for ind in indicators:
         ind["mom"] = _momentum(ind.get("history") or [])
