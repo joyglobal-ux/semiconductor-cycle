@@ -7,6 +7,10 @@
 
 라이브: https://joyglobal-ux.github.io/semiconductor-cycle/
 
+상단에 **20일 잠정 속보**(관세청 순별 잠정 수출, 반도체 품목별 Y/Y·M/M)를 둔다 —
+ECOS 월별 확정보다 ~10일 빠른 가장 빠른 선행 신호. `prelim.json` 에 저장하고
+매월 22일 `kcs-prelim-update` 루틴이 관세청 보도자료에서 자동 갱신한다.
+
 ## 지표
 
 | 지표 | 출처 | 단위 | 자동화 |
