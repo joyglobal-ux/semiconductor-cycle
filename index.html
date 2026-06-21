@@ -185,13 +185,13 @@
     document.getElementById('prelim').innerHTML =
       '<div class="prelim">'+
         '<div class="ph">'+
-          '<span class="t">20일 잠정 속보</span>'+
-          '<span class="badge2">잠정</span>'+
+          '<span class="t">관세청 수출 속보</span>'+
+          '<span class="badge2">'+esc(pr.stage||'잠정')+'</span>'+
           '<span class="as">'+esc(pr.asOf||'')+'</span>'+
           '<a class="src" href="'+esc(pr.sourceUrl||'#')+'" target="_blank" rel="noopener">'+esc(pr.source||'관세청')+' ↗</a>'+
         '</div>'+
         '<div class="pgrid">'+pitems+'</div>'+
-        '<div class="pnote">관세청 1~20일 잠정치 — ECOS 월별 확정치보다 ~10일 빠른 한국 반도체 선행 신호. ★=메모리 핵심. M/M가 직전월 모멘텀(낮으면 금색).</div>'+
+        '<div class="pnote">관세청 순별 잠정 — 한 달 3회(1~10일·1~20일·전체)로 ECOS 월별 확정보다 ~10일 빠른 한국 반도체 선행 신호. ★=메모리 핵심. M/M가 직전월 모멘텀(낮으면 금색).</div>'+
       '</div>';
   }
 

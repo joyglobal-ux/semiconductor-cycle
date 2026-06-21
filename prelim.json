@@ -1,6 +1,7 @@
 {
-  "_comment": "관세청 순별(1~20일) 잠정 수출 — 가장 빠른 한국 반도체 신호(매월 21일경 보도자료). 반도체 품목만. 매월 kcs-prelim-update 루틴이 customs.go.kr 보도자료에서 갱신. 잠정치이므로 확정 아님. 숫자는 출처 확인 후 입력.",
+  "_comment": "관세청 수출 속보 — 가장 빠른 한국 반도체 신호. 한 달 3회(1~10일 발표 ~11일 / 1~20일 ~22일 / 전월 전체 ~익월1~2일). 매번 '가장 최근 발표분'으로 갱신. 반도체 품목만. kcs-prelim-update 루틴(매월 2·11·22일)이 customs.go.kr 보도자료에서 자동 갱신. 숫자는 출처 확인 후 입력. stage=잠정/확정, asOf=기준 기간.",
   "asOf": "2026-06 · 1~20일",
+  "stage": "잠정",
   "source": "관세청 순별 잠정",
   "sourceUrl": "https://www.customs.go.kr/kcs/na/ntt/selectNttList.do?bbsId=1362&mi=2891",
   "items": [

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-21T01:27:07+00:00",
+  "generatedAt": "2026-06-21T10:41:36+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -814,6 +814,7 @@
   },
   "prelim": {
     "asOf": "2026-06 · 1~20일",
+    "stage": "잠정",
     "source": "관세청 순별 잠정",
     "sourceUrl": "https://www.customs.go.kr/kcs/na/ntt/selectNttList.do?bbsId=1362&mi=2891",
     "items": [
