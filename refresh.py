@@ -301,6 +301,16 @@ MANUAL_DEFS = {
 }
 
 
+def _load_prelim() -> dict | None:
+    """관세청 순별(1~20일) 잠정 수출 속보 — 가장 빠른 신호. prelim.json (루틴 갱신)."""
+    p = HERE / "prelim.json"
+    if not p.exists():
+        return None
+    d = json.loads(p.read_text(encoding="utf-8"))
+    d.pop("_comment", None)
+    return d
+
+
 def load_manual() -> list[dict]:
     path = HERE / "manual.json"
     raw = {}
@@ -417,6 +427,7 @@ def main() -> None:
         "generatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "indicators": indicators,
         "interpretation": interpretation,
+        "prelim": _load_prelim(),
         "note": "각 지표는 출처에서 직접 검증 가능. 통합 해석은 점수 합산이 아니라 규칙 기반 국면 판정.",
     }
 

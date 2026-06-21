@@ -39,6 +39,25 @@
   .chip b{color:var(--txt);font-weight:700}
   .chip .st{font-size:10.5px;padding:1px 6px;border-radius:5px;font-weight:700}
 
+  /* 20일 잠정 속보 */
+  .prelim{margin:14px 0 8px;border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:15px 17px}
+  .prelim .ph{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:13px}
+  .prelim .ph .t{font-size:13px;font-weight:800;letter-spacing:.2px}
+  .prelim .ph .badge2{font-size:10px;font-weight:800;color:var(--gold);background:rgba(255,214,107,.12);padding:2px 7px;border-radius:6px}
+  .prelim .ph .as{font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+  .prelim .ph .src{font-size:11px;color:var(--faint);margin-left:auto}
+  .prelim .ph .src:hover{color:var(--accent)}
+  .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  @media(max-width:640px){.pgrid{grid-template-columns:1fr 1fr}}
+  .pitem{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:11px 12px}
+  .pitem.hl{border-color:var(--accent-dim)}
+  .pitem .pl{font-size:12px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:5px}
+  .pitem .pl .star{color:var(--gold);font-size:10px}
+  .pitem .py{font-size:22px;font-weight:800;letter-spacing:-.6px;color:var(--go);margin-top:5px;font-variant-numeric:tabular-nums}
+  .pitem .py .u{font-size:10.5px;color:var(--faint);font-weight:700;margin-left:3px}
+  .pitem .pm{font-size:11.5px;font-weight:700;margin-top:3px;font-variant-numeric:tabular-nums}
+  .prelim .pnote{font-size:11px;color:var(--faint);margin-top:12px;line-height:1.6}
+
   .shead{display:flex;align-items:center;gap:10px;margin:30px 0 13px}
   .shead .ttl{font-size:13px;font-weight:800;color:var(--txt);letter-spacing:.2px}
   .shead .desc{font-size:11.5px;color:var(--faint)}
@@ -83,6 +102,8 @@
   <div class="updated" id="updated">불러오는 중…</div>
 
   <div id="verdict"></div>
+
+  <div id="prelim"></div>
 
   <div class="shead" style="margin-top:26px">
     <span class="ttl">성장률 (펀더멘털)</span>
@@ -149,6 +170,30 @@
       '<div class="headline">'+esc(iv.headline)+'</div>'+
       (chips?'<div class="bullets">'+chips+'</div>':'')+
     '</div>';
+
+  // ── 20일 잠정 속보 (관세청, 가장 빠른 신호)
+  var pr = D.prelim;
+  if(pr && pr.items && pr.items.length){
+    var pitems = pr.items.map(function(it){
+      var mc = it.mom>=15?'var(--go)':(it.mom>=5?'var(--muted)':'var(--gold)');
+      return '<div class="pitem'+(it.hl?' hl':'')+'">'+
+        '<div class="pl">'+(it.hl?'<span class="star">★</span>':'')+esc(it.label)+'</div>'+
+        '<div class="py">'+fmt(it.yoy)+'%<span class="u">Y/Y</span></div>'+
+        '<div class="pm" style="color:'+mc+'">M/M '+fmt(it.mom)+'%</div>'+
+      '</div>';
+    }).join('');
+    document.getElementById('prelim').innerHTML =
+      '<div class="prelim">'+
+        '<div class="ph">'+
+          '<span class="t">20일 잠정 속보</span>'+
+          '<span class="badge2">잠정</span>'+
+          '<span class="as">'+esc(pr.asOf||'')+'</span>'+
+          '<a class="src" href="'+esc(pr.sourceUrl||'#')+'" target="_blank" rel="noopener">'+esc(pr.source||'관세청')+' ↗</a>'+
+        '</div>'+
+        '<div class="pgrid">'+pitems+'</div>'+
+        '<div class="pnote">관세청 1~20일 잠정치 — ECOS 월별 확정치보다 ~10일 빠른 한국 반도체 선행 신호. ★=메모리 핵심. M/M가 직전월 모멘텀(낮으면 금색).</div>'+
+      '</div>';
+  }
 
   // ── 카드 렌더
   function card(i){

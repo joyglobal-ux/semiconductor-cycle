@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-20T23:13:59+00:00",
+  "generatedAt": "2026-06-21T01:25:44+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -811,6 +811,45 @@
     "pendingCount": 0,
     "pendingNames": [],
     "liveCount": 5
+  },
+  "prelim": {
+    "asOf": "2026-06 · 1~20일",
+    "source": "관세청 순별 잠정",
+    "sourceUrl": "https://www.customs.go.kr/kcs/na/ntt/selectNttList.do?bbsId=1362&mi=2891",
+    "items": [
+      {
+        "label": "디램 (모듈포함)",
+        "yoy": 342,
+        "mom": 3,
+        "hl": true
+      },
+      {
+        "label": "HBM (MCP)",
+        "yoy": 209,
+        "mom": 51,
+        "hl": true
+      },
+      {
+        "label": "낸드 (플래시)",
+        "yoy": 336,
+        "mom": 28
+      },
+      {
+        "label": "SSD",
+        "yoy": 405,
+        "mom": 25
+      },
+      {
+        "label": "전자부품 (MLCC)",
+        "yoy": 24,
+        "mom": 23
+      },
+      {
+        "label": "반도체 제조장비",
+        "yoy": 38,
+        "mom": 43
+      }
+    ]
   },
   "note": "각 지표는 출처에서 직접 검증 가능. 통합 해석은 점수 합산이 아니라 규칙 기반 국면 판정."
 }
