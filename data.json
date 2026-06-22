@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-21T10:41:36+00:00",
+  "generatedAt": "2026-06-22T06:56:47+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -819,36 +819,21 @@
     "sourceUrl": "https://www.customs.go.kr/kcs/na/ntt/selectNttList.do?bbsId=1362&mi=2891",
     "items": [
       {
-        "label": "디램 (모듈포함)",
-        "yoy": 342,
-        "mom": 3,
+        "label": "반도체 (전체·메모리 주도)",
+        "yoy": 188,
+        "mom": 0,
         "hl": true
       },
       {
-        "label": "HBM (MCP)",
-        "yoy": 209,
-        "mom": 51,
+        "label": "컴퓨터주변기기 (AI서버 SSD 등)",
+        "yoy": 293,
+        "mom": 0,
         "hl": true
       },
       {
-        "label": "낸드 (플래시)",
-        "yoy": 336,
-        "mom": 28
-      },
-      {
-        "label": "SSD",
-        "yoy": 405,
-        "mom": 25
-      },
-      {
-        "label": "전자부품 (MLCC)",
-        "yoy": 24,
-        "mom": 23
-      },
-      {
-        "label": "반도체 제조장비",
-        "yoy": 38,
-        "mom": 43
+        "label": "반도체 제조장비 (수입)",
+        "yoy": 52,
+        "mom": 0
       }
     ]
   },
