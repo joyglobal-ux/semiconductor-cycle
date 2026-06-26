@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-25T23:22:37+00:00",
+  "generatedAt": "2026-06-26T23:12:19+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -542,7 +542,7 @@
       "source": "PHLX ^SOX · yfinance",
       "sourceUrl": "https://www.nasdaq.com/market-activity/index/sox",
       "status": "auto",
-      "value": 83.7,
+      "value": 74.0,
       "asOf": "2026-06",
       "dir": "up",
       "history": [
@@ -688,23 +688,23 @@
         },
         {
           "t": "2026-06",
-          "v": 83.72
+          "v": 74.0
         }
       ],
       "mom": {
         "phase": "가속",
         "tone": "pos",
-        "level": 83.7,
-        "mom": 25.3,
-        "slope3": 76.6,
-        "peakValue": 83.7,
+        "level": 74.0,
+        "mom": 15.6,
+        "slope3": 66.9,
+        "peakValue": 74.0,
         "peakTime": "2026-06",
         "peakAgo": 0,
         "fromPeak": 0.0,
         "troughValue": -16.7,
         "troughTime": "2023-10",
         "troughAgo": 32,
-        "fromTrough": 100.4,
+        "fromTrough": 90.7,
         "peakIdx": 35,
         "troughIdx": 3
       }
@@ -787,7 +787,7 @@
       },
       {
         "label": "SOX 지수 모멘텀",
-        "value": 83.7,
+        "value": 74.0,
         "unit": "3M",
         "phase": "가속",
         "tone": "pos",
