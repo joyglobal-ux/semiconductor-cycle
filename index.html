@@ -58,6 +58,14 @@
   .pitem .pm{font-size:11.5px;font-weight:700;margin-top:3px;font-variant-numeric:tabular-nums}
   .prelim .pnote{font-size:11px;color:var(--faint);margin-top:12px;line-height:1.6}
 
+  /* 주가 모멘텀 패널 */
+  .sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  @media(max-width:640px){.sgrid{grid-template-columns:1fr 1fr}}
+  .sitem .sr{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);
+    margin-top:3px;font-variant-numeric:tabular-nums}
+  .sitem .sr b{font-weight:700}
+  .rsbadge{font-size:11px;font-weight:800;padding:3px 9px;border-radius:7px;letter-spacing:-.1px}
+
   .shead{display:flex;align-items:center;gap:10px;margin:30px 0 13px}
   .shead .ttl{font-size:13px;font-weight:800;color:var(--txt);letter-spacing:.2px}
   .shead .desc{font-size:11.5px;color:var(--faint)}
@@ -104,6 +112,8 @@
   <div id="verdict"></div>
 
   <div id="prelim"></div>
+
+  <div id="stocks"></div>
 
   <div class="shead" style="margin-top:26px">
     <span class="ttl">성장률 (펀더멘털)</span>
@@ -192,6 +202,38 @@
         '</div>'+
         '<div class="pgrid">'+pitems+'</div>'+
         '<div class="pnote">관세청 순별 잠정 — 한 달 3회(1~10일·1~20일·전체)로 ECOS 월별 확정보다 ~10일 빠른 한국 반도체 선행 신호. ★=메모리 핵심. M/M가 직전월 모멘텀(낮으면 금색).</div>'+
+      '</div>';
+  }
+
+  // ── 주가 모멘텀 (가격 액션 = 정보)
+  var st = D.stocks;
+  if(st && st.items && st.items.length){
+    function rcol(x){ return x==null?'var(--faint)':(x>0?'var(--go)':(x<0?'var(--stop)':'var(--muted)')); }
+    function rv(x){ return x==null?'—':fmt(x)+'%'; }
+    var sitems = st.items.map(function(it){
+      return '<div class="pitem sitem">'+
+        '<div class="pl">'+esc(it.label)+'</div>'+
+        '<div class="py" style="color:'+rcol(it.r1m)+'">'+rv(it.r1m)+'<span class="u">1M</span></div>'+
+        '<div class="sr"><span>3M</span><b style="color:'+rcol(it.r3m)+'">'+rv(it.r3m)+'</b></div>'+
+        '<div class="sr"><span>12M</span><b style="color:'+rcol(it.r12m)+'">'+rv(it.r12m)+'</b></div>'+
+        '<div class="sr"><span>52주 고점比</span><b style="color:'+(it.fromHigh>-3?'var(--go)':'var(--muted)')+'">'+rv(it.fromHigh)+'</b></div>'+
+      '</div>';
+    }).join('');
+    var rs = '';
+    if(st.rsSpread1m!=null){
+      var on = st.rsFlip;
+      rs = '<span class="rsbadge" style="color:'+(on?'var(--go)':'var(--muted)')+';background:'+(on?'rgba(34,197,94,.13)':'var(--panel2)')+'">'+
+        '삼전−하이닉스 1M '+fmt(st.rsSpread1m)+'%p'+(on?' · RS 역전!':'')+'</span>';
+    }
+    document.getElementById('stocks').innerHTML =
+      '<div class="prelim">'+
+        '<div class="ph">'+
+          '<span class="t">주가 모멘텀</span>'+rs+
+          '<span class="as">'+esc(st.asOf||'')+'</span>'+
+          '<span class="src">yfinance · 수정주가</span>'+
+        '</div>'+
+        '<div class="sgrid">'+sitems+'</div>'+
+        '<div class="pnote">'+esc(st.note||'')+'</div>'+
       '</div>';
   }
 

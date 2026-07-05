@@ -201,6 +201,89 @@ def fetch_sox_momentum() -> dict:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# 2.5) 개별 주가 모멘텀 — 하이닉스·삼전·MU·SNDK (일별, 키 불필요)
+#      "가격 액션 = 정보": 1M/3M/12M 수익률 + 52주 고점 대비.
+#      삼전-하이닉스 1M 스프레드 = 삼전 재진입 트리거 ①(RS 역전)의 상시 감시선.
+# ─────────────────────────────────────────────────────────────────────────────
+STOCK_DEFS = [
+    # (yfinance ticker, fdr 폴백 코드, 라벨)
+    ("000660.KS", "000660", "SK하이닉스"),
+    ("005930.KS", "005930", "삼성전자"),
+    ("MU", "MU", "Micron"),
+    ("SNDK", "SNDK", "SanDisk"),
+]
+
+
+def _stock_close(yf_ticker: str, fdr_code: str) -> pd.Series | None:
+    """일별 종가(수정주가) 시리즈. yfinance 실패 시 FinanceDataReader 폴백."""
+    try:
+        import yfinance as yf
+
+        df = yf.download(yf_ticker, period="2y", interval="1d", progress=False, auto_adjust=True)
+        if df is not None and not df.empty:
+            c = df["Close"]
+            if isinstance(c, pd.DataFrame):
+                c = c.iloc[:, 0]
+            c = c.dropna()
+            if len(c) > 30:
+                return c
+    except Exception as e:  # noqa: BLE001
+        _log(f"  ! yfinance {yf_ticker} 실패: {e}")
+    try:
+        import FinanceDataReader as fdr
+
+        df = fdr.DataReader(fdr_code)
+        c = df["Close"].dropna()
+        if len(c) > 30:
+            return c.tail(500)
+    except Exception as e:  # noqa: BLE001
+        _log(f"  ! fdr {fdr_code} 실패: {e}")
+    return None
+
+
+def fetch_stocks() -> dict | None:
+    """주가 모멘텀 패널. 실패 종목은 건너뛰고, 전부 실패면 None(패널 미표시)."""
+    items, as_of = [], None
+    for yft, fdrc, label in STOCK_DEFS:
+        c = _stock_close(yft, fdrc)
+        if c is None:
+            continue
+
+        def ret(n: int) -> float | None:
+            if len(c) <= n:
+                return None
+            return round((float(c.iloc[-1]) / float(c.iloc[-1 - n]) - 1) * 100, 1)
+
+        hi252 = float(c.tail(252).max())
+        items.append(
+            {
+                "ticker": yft,
+                "label": label,
+                "r1m": ret(21),
+                "r3m": ret(63),
+                "r12m": ret(252),
+                "fromHigh": round((float(c.iloc[-1]) / hi252 - 1) * 100, 1),
+            }
+        )
+        t = c.index[-1]
+        as_of = max(as_of, t) if as_of is not None else t
+        _log(f"  {label}: 1M {items[-1]['r1m']}% · 3M {items[-1]['r3m']}% · 고점比 {items[-1]['fromHigh']}%")
+    if not items:
+        return None
+    by = {i["label"]: i for i in items}
+    spread = None
+    if "삼성전자" in by and "SK하이닉스" in by and by["삼성전자"]["r1m"] is not None and by["SK하이닉스"]["r1m"] is not None:
+        spread = round(by["삼성전자"]["r1m"] - by["SK하이닉스"]["r1m"], 1)
+    return {
+        "asOf": as_of.strftime("%Y-%m-%d") if as_of is not None else None,
+        "items": items,
+        "rsSpread1m": spread,          # 삼전 1M − 하이닉스 1M (%p). 양수 전환 = RS 역전
+        "rsFlip": (spread is not None and spread > 0),
+        "note": "삼전 재진입 트리거 = ① 1M RS 역전(스프레드 양수) AND ② 삼전 신고가 돌파(거래량). 고점比로 ②를 가늠.",
+    }
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # 3) 한국 반도체 수출 + DRAM 수출물가 — 한은 ECOS (무료 키: 환경변수 ECOS_API_KEY)
 #    월별·자동. 키가 없으면 pending-key 상태로 자리만 잡는다.
 # ─────────────────────────────────────────────────────────────────────────────
@@ -275,7 +358,7 @@ def fetch_dram_price() -> dict:
         "labelEn": "DRAM export price",
         "unit": "MoM",
         "group": "growth",
-        "role": "메모리 가격 사이클 (삼성·하이닉스 직결)",
+        "role": "메모리 가격 사이클 · ⚠ 금액÷물량 블렌드 단가 — 제품 mix(HBM/저가 DDR 비중)에 왜곡될 수 있음, 고정거래가와 교차 확인",
         "source": "한국은행 ECOS · 수출물가지수(DRAM)",
         "sourceUrl": "https://ecos.bok.or.kr/",
         "status": "pending-key",
@@ -297,6 +380,17 @@ MANUAL_DEFS = {
         "role": "업계 공식 기준점",
         "source": "WSTS / SIA 월간 보도자료",
         "sourceUrl": "https://www.semiconductors.org/category/news/global-sales-report/",
+    },
+    # DRAM 수출물가(블렌드)의 mix 왜곡을 보정하는 실거래 벤치마크.
+    # TrendForce가 매월 말 발표하는 고정거래가(DDR5 16Gb 등 대표 품목) MoM을 입력.
+    "dram_contract_price": {
+        "label": "DRAM 고정거래가",
+        "labelEn": "DRAM contract price (fixed)",
+        "unit": "MoM",
+        "group": "growth",
+        "role": "계약가 — mix 왜곡 없는 가격 벤치마크 (수출물가 교차 검증용)",
+        "source": "TrendForce 월말 고정거래가 (수동)",
+        "sourceUrl": "https://www.trendforce.com/price/",
     },
 }
 
@@ -428,6 +522,7 @@ def main() -> None:
         "indicators": indicators,
         "interpretation": interpretation,
         "prelim": _load_prelim(),
+        "stocks": fetch_stocks(),
         "note": "각 지표는 출처에서 직접 검증 가능. 통합 해석은 점수 합산이 아니라 규칙 기반 국면 판정.",
     }
 
