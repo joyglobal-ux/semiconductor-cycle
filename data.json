@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-04T23:01:26+00:00",
+  "generatedAt": "2026-07-05T07:46:58+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -184,7 +184,7 @@
       "labelEn": "DRAM export price",
       "unit": "MoM",
       "group": "growth",
-      "role": "메모리 가격 사이클 (삼성·하이닉스 직결)",
+      "role": "메모리 가격 사이클 · ⚠ 금액÷물량 블렌드 단가 — 제품 mix(HBM/저가 DDR 비중)에 왜곡될 수 있음, 고정거래가와 교차 확인",
       "source": "한국은행 ECOS · 수출물가지수(DRAM)",
       "sourceUrl": "https://ecos.bok.or.kr/",
       "status": "auto",
@@ -753,13 +753,29 @@
         "peakIdx": 2,
         "troughIdx": 0
       }
+    },
+    {
+      "id": "dram_contract_price",
+      "label": "DRAM 고정거래가",
+      "labelEn": "DRAM contract price (fixed)",
+      "unit": "MoM",
+      "group": "growth",
+      "role": "계약가 — mix 왜곡 없는 가격 벤치마크 (수출물가 교차 검증용)",
+      "source": "TrendForce 월말 고정거래가 (수동)",
+      "sourceUrl": "https://www.trendforce.com/price/",
+      "value": null,
+      "asOf": null,
+      "dir": "flat",
+      "history": [],
+      "status": "pending-input",
+      "mom": null
     }
   ],
   "interpretation": {
     "regime": "확장 · 둔화 조짐",
     "regimeEn": "Expansion, cooling",
     "tone": "warn",
-    "headline": "성장지표 4개 중 라이브 4개 — 4개 플러스 · 2개 가속 → 확장 · 둔화 조짐.  ⚠ 꺾임 감시: 한국 반도체 수출(가속 둔화), DRAM 수출물가(가속 둔화).",
+    "headline": "성장지표 5개 중 라이브 4개 — 4개 플러스 · 2개 가속 → 확장 · 둔화 조짐.  ⚠ 꺾임 감시: 한국 반도체 수출(가속 둔화), DRAM 수출물가(가속 둔화).",
     "bullets": [
       {
         "label": "한국 반도체 수출",
@@ -802,14 +818,16 @@
         "group": "growth"
       }
     ],
-    "growthTotal": 4,
+    "growthTotal": 5,
     "growthLive": 4,
     "growthPositive": 4,
     "growthRising": 2,
     "marketLive": 1,
     "coolingCount": 2,
-    "pendingCount": 0,
-    "pendingNames": [],
+    "pendingCount": 1,
+    "pendingNames": [
+      "DRAM 고정거래가"
+    ],
     "liveCount": 5
   },
   "prelim": {
@@ -836,6 +854,46 @@
         "mom": 0
       }
     ]
+  },
+  "stocks": {
+    "asOf": "2026-07-03",
+    "items": [
+      {
+        "ticker": "000660.KS",
+        "label": "SK하이닉스",
+        "r1m": 5.5,
+        "r3m": 170.4,
+        "r12m": 847.5,
+        "fromHigh": -16.9
+      },
+      {
+        "ticker": "005930.KS",
+        "label": "삼성전자",
+        "r1m": -11.9,
+        "r3m": 63.2,
+        "r12m": 429.3,
+        "fromHigh": -14.6
+      },
+      {
+        "ticker": "MU",
+        "label": "Micron",
+        "r1m": -8.3,
+        "r3m": 165.2,
+        "r12m": 708.9,
+        "fromHigh": -19.6
+      },
+      {
+        "ticker": "SNDK",
+        "label": "SanDisk",
+        "r1m": 1.7,
+        "r3m": 151.9,
+        "r12m": 3781.2,
+        "fromHigh": -25.3
+      }
+    ],
+    "rsSpread1m": -17.4,
+    "rsFlip": false,
+    "note": "삼전 재진입 트리거 = ① 1M RS 역전(스프레드 양수) AND ② 삼전 신고가 돌파(거래량). 고점比로 ②를 가늠."
   },
   "note": "각 지표는 출처에서 직접 검증 가능. 통합 해석은 점수 합산이 아니라 규칙 기반 국면 판정."
 }
