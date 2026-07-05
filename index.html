@@ -85,8 +85,13 @@
     margin-left:auto;align-self:center;letter-spacing:-.1px;white-space:nowrap}
   .card .mom{font-size:11.5px;color:var(--muted);margin-top:8px;font-variant-numeric:tabular-nums;letter-spacing:-.1px}
   .card .mom b{font-weight:800}
-  .card .spark{margin-top:auto;padding-top:12px}
-  .card canvas{width:100%;height:56px;display:block}
+  .card .spark{margin-top:auto;padding-top:12px;position:relative}
+  .card canvas{width:100%;height:56px;display:block;cursor:crosshair}
+  .tip{position:absolute;pointer-events:none;background:#0f1117;border:1px solid var(--line);
+    border-radius:7px;padding:4px 9px;font-size:11px;color:var(--txt);font-variant-numeric:tabular-nums;
+    white-space:nowrap;transform:translate(-50%,-115%);display:none;z-index:5;
+    box-shadow:0 4px 14px rgba(0,0,0,.45)}
+  .tip b{color:var(--accent);font-weight:800}
   .card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:11px;
     font-size:11px;color:var(--faint)}
   .card .src:hover{color:var(--accent)}
@@ -281,7 +286,7 @@
   document.getElementById('market').innerHTML = market.map(card).join('');
 
   // ── 차트: 0선(점선) · 중립 본선 · 정점 금색 링 · 마지막 구간 방향색 · 끝점
-  function spark(i){
+  function spark(i, hk){
     var cv = document.getElementById('sp_'+i.id);
     if(!cv || !i.history || i.history.length<2) return;
     var m = i.mom || {};
@@ -313,9 +318,37 @@
       ctx.strokeStyle='#ffd66b'; ctx.lineWidth=1.6; ctx.stroke(); }
     // 끝점
     ctx.beginPath(); ctx.arc(X(last),Y(vs[last]),2.8,0,7); ctx.fillStyle=turn; ctx.fill();
+    // 호버 크로스헤어
+    if(hk!=null){
+      ctx.save(); ctx.strokeStyle='#9aa3b2'; ctx.lineWidth=1; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.moveTo(X(hk),0); ctx.lineTo(X(hk),h); ctx.stroke(); ctx.restore();
+      ctx.beginPath(); ctx.arc(X(hk),Y(vs[hk]),3.4,0,7);
+      ctx.fillStyle='#0f1117'; ctx.fill();
+      ctx.strokeStyle='#8b9bff'; ctx.lineWidth=2; ctx.stroke();
+    }
   }
-  D.indicators.forEach(spark);
-  window.addEventListener('resize', function(){ D.indicators.forEach(spark); });
+  function attachHover(i){
+    var cv = document.getElementById('sp_'+i.id);
+    if(!cv || !i.history || i.history.length<2) return;
+    var tip = document.createElement('div'); tip.className='tip'; cv.parentNode.appendChild(tip);
+    function move(clientX){
+      var r = cv.getBoundingClientRect(), n = i.history.length;
+      var k = Math.round((clientX - r.left - 1)/(r.width-4)*(n-1));
+      k = Math.max(0, Math.min(n-1, k));
+      spark(i, k);
+      var p = i.history[k];
+      tip.style.display='block';
+      tip.style.left = ((k/(n-1))*(r.width-4)+1)+'px';
+      tip.style.top = '10px';
+      tip.innerHTML = esc(p.t)+' · <b>'+fmt(p.v)+'</b>% '+esc(i.unit);
+    }
+    cv.addEventListener('mousemove', function(ev){ move(ev.clientX); });
+    cv.addEventListener('touchmove', function(ev){ if(ev.touches.length){ move(ev.touches[0].clientX); ev.preventDefault(); } }, {passive:false});
+    cv.addEventListener('mouseleave', function(){ tip.style.display='none'; spark(i); });
+    cv.addEventListener('touchend', function(){ tip.style.display='none'; spark(i); });
+  }
+  D.indicators.forEach(function(i){ spark(i); attachHover(i); });
+  window.addEventListener('resize', function(){ D.indicators.forEach(function(i){ spark(i); }); });
 
   document.getElementById('note').innerHTML =
     '<b>읽는 법.</b> 핵심은 <b>레벨이 아니라 방향</b>입니다. <b>국면 칩</b> = 빠른 판정, '+
