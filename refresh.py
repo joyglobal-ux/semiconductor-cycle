@@ -249,19 +249,23 @@ def fetch_stocks() -> dict | None:
         if c is None:
             continue
 
-        def ret(n: int) -> float | None:
-            if len(c) <= n:
+        # 달력 기준 lookback — rs-screener(compute_returns.period_targets)와 동일 규약.
+        # 21거래일 방식과 며칠 어긋나 수치가 달라지는 혼선 방지 (2026-07-05 통일).
+        def ret(months: int) -> float | None:
+            target = c.index[-1] - pd.DateOffset(months=months)
+            prior = c[c.index <= target]
+            if prior.empty:
                 return None
-            return round((float(c.iloc[-1]) / float(c.iloc[-1 - n]) - 1) * 100, 1)
+            return round((float(c.iloc[-1]) / float(prior.iloc[-1]) - 1) * 100, 1)
 
         hi252 = float(c.tail(252).max())
         items.append(
             {
                 "ticker": yft,
                 "label": label,
-                "r1m": ret(21),
-                "r3m": ret(63),
-                "r12m": ret(252),
+                "r1m": ret(1),
+                "r3m": ret(3),
+                "r12m": ret(12),
                 "fromHigh": round((float(c.iloc[-1]) / hi252 - 1) * 100, 1),
             }
         )
