@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-08T23:12:45+00:00",
+  "generatedAt": "2026-07-09T00:09:17+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -718,8 +718,8 @@
       "role": "업계 공식 기준점",
       "source": "WSTS / SIA 월간 보도자료",
       "sourceUrl": "https://www.semiconductors.org/category/news/global-sales-report/",
-      "value": 93.9,
-      "asOf": "2026-04",
+      "value": 104.1,
+      "asOf": "2026-05",
       "dir": "up",
       "history": [
         {
@@ -733,24 +733,28 @@
         {
           "t": "2026-04",
           "v": 93.9
+        },
+        {
+          "t": "2026-05",
+          "v": 104.1
         }
       ],
       "status": "manual",
       "mom": {
         "phase": "가속",
         "tone": "pos",
-        "level": 93.9,
-        "mom": 14.7,
-        "slope3": 32.1,
-        "peakValue": 93.9,
-        "peakTime": "2026-04",
+        "level": 104.1,
+        "mom": 10.2,
+        "slope3": 42.3,
+        "peakValue": 104.1,
+        "peakTime": "2026-05",
         "peakAgo": 0,
         "fromPeak": 0.0,
         "troughValue": 61.8,
         "troughTime": "2026-02",
-        "troughAgo": 2,
-        "fromTrough": 32.1,
-        "peakIdx": 2,
+        "troughAgo": 3,
+        "fromTrough": 42.3,
+        "peakIdx": 3,
         "troughIdx": 0
       }
     },
@@ -811,7 +815,7 @@
       },
       {
         "label": "WSTS 글로벌 매출",
-        "value": 93.9,
+        "value": 104.1,
         "unit": "YoY",
         "phase": "가속",
         "tone": "pos",
