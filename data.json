@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-14T23:00:25+00:00",
+  "generatedAt": "2026-07-15T23:00:54+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -188,14 +188,10 @@
       "source": "한국은행 ECOS · 수출물가지수(DRAM)",
       "sourceUrl": "https://ecos.bok.or.kr/",
       "status": "auto",
-      "value": 7.6,
-      "asOf": "2026-05",
-      "dir": "up",
+      "value": 3.1,
+      "asOf": "2026-06",
+      "dir": "down",
       "history": [
-        {
-          "t": "2023-06",
-          "v": -3.93
-        },
         {
           "t": "2023-07",
           "v": -1.84
@@ -335,24 +331,28 @@
         {
           "t": "2026-05",
           "v": 7.64
+        },
+        {
+          "t": "2026-06",
+          "v": 3.11
         }
       ],
       "mom": {
-        "phase": "가속 둔화",
+        "phase": "둔화",
         "tone": "warn",
-        "level": 7.6,
-        "mom": -17.3,
-        "slope3": 1.3,
+        "level": 3.1,
+        "mom": -4.5,
+        "slope3": -18.7,
         "peakValue": 31.6,
         "peakTime": "2026-01",
-        "peakAgo": 4,
-        "fromPeak": -23.9,
-        "troughValue": -3.9,
-        "troughTime": "2023-06",
-        "troughAgo": 35,
-        "fromTrough": 11.6,
-        "peakIdx": 31,
-        "troughIdx": 0
+        "peakAgo": 5,
+        "fromPeak": -28.5,
+        "troughValue": -3.5,
+        "troughTime": "2025-02",
+        "troughAgo": 16,
+        "fromTrough": 6.6,
+        "peakIdx": 30,
+        "troughIdx": 19
       }
     },
     {
@@ -542,7 +542,7 @@
       "source": "PHLX ^SOX · yfinance",
       "sourceUrl": "https://www.nasdaq.com/market-activity/index/sox",
       "status": "auto",
-      "value": 20.5,
+      "value": 18.0,
       "asOf": "2026-07",
       "dir": "down",
       "history": [
@@ -688,23 +688,23 @@
         },
         {
           "t": "2026-07",
-          "v": 20.55
+          "v": 18.04
         }
       ],
       "mom": {
         "phase": "둔화",
         "tone": "warn",
-        "level": 20.6,
-        "mom": -67.2,
-        "slope3": -10.8,
+        "level": 18.0,
+        "mom": -69.7,
+        "slope3": -13.3,
         "peakValue": 87.8,
         "peakTime": "2026-06",
         "peakAgo": 1,
-        "fromPeak": -67.2,
+        "fromPeak": -69.7,
         "troughValue": -16.7,
         "troughTime": "2023-10",
         "troughAgo": 33,
-        "fromTrough": 37.3,
+        "fromTrough": 34.8,
         "peakIdx": 34,
         "troughIdx": 2
       }
@@ -779,7 +779,7 @@
     "regime": "확장 · 둔화 조짐",
     "regimeEn": "Expansion, cooling",
     "tone": "warn",
-    "headline": "성장지표 5개 중 라이브 4개 — 4개 플러스 · 3개 가속 → 확장 · 둔화 조짐.  ⚠ 꺾임 감시: DRAM 수출물가(가속 둔화).",
+    "headline": "성장지표 5개 중 라이브 4개 — 4개 플러스 · 3개 가속 → 확장 · 둔화 조짐.  ⚠ 꺾임 감시: DRAM 수출물가(둔화).",
     "bullets": [
       {
         "label": "한국 반도체 수출",
@@ -791,9 +791,9 @@
       },
       {
         "label": "DRAM 수출물가",
-        "value": 7.6,
+        "value": 3.1,
         "unit": "MoM",
-        "phase": "가속 둔화",
+        "phase": "둔화",
         "tone": "warn",
         "group": "growth"
       },
@@ -807,7 +807,7 @@
       },
       {
         "label": "SOX 지수 모멘텀",
-        "value": 20.5,
+        "value": 18.0,
         "unit": "3M",
         "phase": "둔화",
         "tone": "warn",
@@ -860,42 +860,42 @@
     ]
   },
   "stocks": {
-    "asOf": "2026-07-14",
+    "asOf": "2026-07-15",
     "items": [
       {
         "ticker": "000660.KS",
         "label": "SK하이닉스",
-        "r1m": -11.0,
-        "r3m": 73.5,
-        "r12m": 540.3,
-        "fromHigh": -34.5
+        "r1m": -9.0,
+        "r3m": 83.3,
+        "r12m": 600.4,
+        "fromHigh": -28.7
       },
       {
         "ticker": "005930.KS",
         "label": "삼성전자",
-        "r1m": -18.4,
-        "r3m": 27.4,
-        "r12m": 325.6,
-        "fromHigh": -27.4
+        "r1m": -17.1,
+        "r3m": 32.5,
+        "r12m": 343.8,
+        "fromHigh": -22.9
       },
       {
         "ticker": "MU",
         "label": "Micron",
-        "r1m": 0.2,
-        "r3m": 111.2,
-        "r12m": 730.2,
-        "fromHigh": -19.0
+        "r1m": -16.9,
+        "r3m": 98.2,
+        "r12m": 654.1,
+        "fromHigh": -25.5
       },
       {
         "ticker": "SNDK",
         "label": "SanDisk",
-        "r1m": -11.2,
-        "r3m": 86.1,
-        "r12m": 4038.0,
-        "fromHigh": -24.7
+        "r1m": -23.4,
+        "r3m": 81.1,
+        "r12m": 3680.4,
+        "fromHigh": -30.8
       }
     ],
-    "rsSpread1m": -7.4,
+    "rsSpread1m": -8.1,
     "rsFlip": false,
     "note": "삼전 재진입 트리거 = ① 1M RS 역전(스프레드 양수) AND ② 삼전 신고가 돌파(거래량). 고점比로 ②를 가늠."
   },
