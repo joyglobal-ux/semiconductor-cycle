@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-16T23:01:22+00:00",
+  "generatedAt": "2026-07-17T22:53:46+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -365,14 +365,10 @@
       "source": "FRED · IPG3344S",
       "sourceUrl": "https://fred.stlouisfed.org/series/IPG3344S",
       "status": "auto",
-      "value": 14.4,
-      "asOf": "2026-05",
+      "value": 11.5,
+      "asOf": "2026-06",
       "dir": "up",
       "history": [
-        {
-          "t": "2023-06",
-          "v": 3.19
-        },
         {
           "t": "2023-07",
           "v": 3.78
@@ -495,41 +491,45 @@
         },
         {
           "t": "2026-01",
-          "v": 11.88
+          "v": 11.79
         },
         {
           "t": "2026-02",
-          "v": 10.27
+          "v": 10.26
         },
         {
           "t": "2026-03",
-          "v": 12.15
+          "v": 9.0
         },
         {
           "t": "2026-04",
-          "v": 13.18
+          "v": 8.76
         },
         {
           "t": "2026-05",
-          "v": 14.39
+          "v": 10.08
+        },
+        {
+          "t": "2026-06",
+          "v": 11.47
         }
       ],
       "mom": {
         "phase": "가속",
         "tone": "pos",
-        "level": 14.4,
-        "mom": 1.2,
-        "slope3": 4.1,
+        "level": 11.5,
+        "mom": 1.4,
+        "slope3": 2.5,
         "peakValue": 19.6,
         "peakTime": "2025-07",
-        "peakAgo": 10,
-        "fromPeak": -5.2,
+        "peakAgo": 11,
+        "fromPeak": -8.2,
         "troughValue": 0.3,
         "troughTime": "2023-09",
-        "troughAgo": 32,
-        "fromTrough": 14.1,
-        "peakIdx": 25,
-        "troughIdx": 3
+        "troughAgo": 33,
+        "fromTrough": 11.2,
+        "peakIdx": 24,
+        "troughIdx": 2
       }
     },
     {
@@ -542,7 +542,7 @@
       "source": "PHLX ^SOX · yfinance",
       "sourceUrl": "https://www.nasdaq.com/market-activity/index/sox",
       "status": "auto",
-      "value": 13.0,
+      "value": 11.1,
       "asOf": "2026-07",
       "dir": "down",
       "history": [
@@ -688,23 +688,23 @@
         },
         {
           "t": "2026-07",
-          "v": 12.98
+          "v": 11.14
         }
       ],
       "mom": {
         "phase": "둔화",
         "tone": "warn",
-        "level": 13.0,
-        "mom": -74.8,
-        "slope3": -18.3,
+        "level": 11.1,
+        "mom": -76.6,
+        "slope3": -20.2,
         "peakValue": 87.8,
         "peakTime": "2026-06",
         "peakAgo": 1,
-        "fromPeak": -74.8,
+        "fromPeak": -76.6,
         "troughValue": -16.7,
         "troughTime": "2023-10",
         "troughAgo": 33,
-        "fromTrough": 29.7,
+        "fromTrough": 27.9,
         "peakIdx": 34,
         "troughIdx": 2
       }
@@ -799,7 +799,7 @@
       },
       {
         "label": "美 반도체 생산",
-        "value": 14.4,
+        "value": 11.5,
         "unit": "YoY",
         "phase": "가속",
         "tone": "pos",
@@ -807,7 +807,7 @@
       },
       {
         "label": "SOX 지수 모멘텀",
-        "value": 13.0,
+        "value": 11.1,
         "unit": "3M",
         "phase": "둔화",
         "tone": "warn",
@@ -860,7 +860,7 @@
     ]
   },
   "stocks": {
-    "asOf": "2026-07-16",
+    "asOf": "2026-07-17",
     "items": [
       {
         "ticker": "000660.KS",
@@ -881,18 +881,18 @@
       {
         "ticker": "MU",
         "label": "Micron",
-        "r1m": -16.4,
+        "r1m": -18.6,
         "r3m": 86.6,
-        "r12m": 634.0,
-        "fromHigh": -29.7
+        "r12m": 650.8,
+        "fromHigh": -30.0
       },
       {
         "ticker": "SNDK",
         "label": "SanDisk",
-        "r1m": -29.1,
-        "r3m": 53.5,
-        "r12m": 3311.7,
-        "fromHigh": -39.6
+        "r1m": -30.8,
+        "r3m": 47.1,
+        "r12m": 3163.1,
+        "fromHigh": -42.0
       }
     ],
     "rsSpread1m": -3.0,
