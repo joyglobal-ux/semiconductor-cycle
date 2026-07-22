@@ -1,12 +1,12 @@
 {
   "_comment": "관세청 수출 속보 — 가장 빠른 한국 반도체 신호. 한 달 3회(1~10일 발표 ~11일 / 1~20일 ~22일 / 전월 전체 ~익월1~2일). 매번 '가장 최근 발표분'으로 갱신. 주의: 순별 잠정은 '반도체 전체' 집계치만 제공하며 디램/HBM/낸드 등 HS세부 품목 분리치는 월별 무역통계에서만 나온다(순별엔 없음). kcs-prelim-update 루틴(매월 2·11·22일)이 customs.go.kr 보도자료에서 갱신. 숫자는 출처 확인 후 입력, 지어내지 말 것. stage=잠정/확정, asOf=기준 기간.",
-  "asOf": "2026-06 · 전체",
-  "stage": "확정",
-  "source": "관세청 월간",
+  "asOf": "2026-07 · 1~20일",
+  "stage": "잠정",
+  "source": "관세청 순별 잠정",
   "sourceUrl": "https://www.customs.go.kr/kcs/na/ntt/selectNttList.do?bbsId=1362&mi=2891",
   "items": [
-    {"label": "반도체 (전체·메모리 주도)", "yoy": 200, "mom": 20, "hl": true},
-    {"label": "컴퓨터주변기기 (AI서버 SSD 등)", "yoy": 309, "mom": 0, "hl": true},
+    {"label": "반도체 (전체·메모리 주도)", "yoy": 181, "mom": 0, "hl": true},
+    {"label": "컴퓨터주변기기 (AI서버 SSD 등)", "yoy": 232, "mom": 0, "hl": true},
     {"label": "반도체 제조장비 (수입)", "yoy": 43, "mom": 0}
   ]
 }
