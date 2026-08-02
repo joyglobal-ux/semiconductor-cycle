@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-01T22:58:11+00:00",
+  "generatedAt": "2026-08-02T01:18:24+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -835,26 +835,26 @@
     "liveCount": 5
   },
   "prelim": {
-    "asOf": "2026-07 · 1~20일",
+    "asOf": "2026-07 · 전체",
     "stage": "잠정",
-    "source": "관세청 순별 잠정",
+    "source": "관세청 월간",
     "sourceUrl": "https://www.customs.go.kr/kcs/na/ntt/selectNttList.do?bbsId=1362&mi=2891",
     "items": [
       {
         "label": "반도체 (전체·메모리 주도)",
-        "yoy": 181,
+        "yoy": 178.8,
+        "mom": -8.5,
+        "hl": true
+      },
+      {
+        "label": "컴퓨터 (AI서버 SSD 등)",
+        "yoy": 404,
         "mom": 0,
         "hl": true
       },
       {
-        "label": "컴퓨터주변기기 (AI서버 SSD 등)",
-        "yoy": 232,
-        "mom": 0,
-        "hl": true
-      },
-      {
-        "label": "반도체 제조장비 (수입)",
-        "yoy": 43,
+        "label": "반도체 제조장비 (수입·1~20일)",
+        "yoy": 56.9,
         "mom": 0
       }
     ]
