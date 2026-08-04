@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-03T11:17:14+00:00",
+  "generatedAt": "2026-08-04T10:31:43+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -542,14 +542,10 @@
       "source": "PHLX ^SOX · yfinance",
       "sourceUrl": "https://www.nasdaq.com/market-activity/index/sox",
       "status": "auto",
-      "value": 7.7,
-      "asOf": "2026-07",
+      "value": -10.9,
+      "asOf": "2026-08",
       "dir": "down",
       "history": [
-        {
-          "t": "2023-08",
-          "v": 6.31
-        },
         {
           "t": "2023-09",
           "v": -6.5
@@ -689,24 +685,28 @@
         {
           "t": "2026-07",
           "v": 7.69
+        },
+        {
+          "t": "2026-08",
+          "v": -10.9
         }
       ],
       "mom": {
-        "phase": "둔화",
-        "tone": "warn",
-        "level": 7.7,
-        "mom": -80.1,
-        "slope3": -23.6,
+        "phase": "침체",
+        "tone": "neg",
+        "level": -10.9,
+        "mom": -18.6,
+        "slope3": -69.3,
         "peakValue": 87.8,
         "peakTime": "2026-06",
-        "peakAgo": 1,
-        "fromPeak": -80.1,
+        "peakAgo": 2,
+        "fromPeak": -98.7,
         "troughValue": -16.7,
         "troughTime": "2023-10",
-        "troughAgo": 33,
-        "fromTrough": 24.4,
-        "peakIdx": 34,
-        "troughIdx": 2
+        "troughAgo": 34,
+        "fromTrough": 5.8,
+        "peakIdx": 33,
+        "troughIdx": 1
       }
     },
     {
@@ -807,10 +807,10 @@
       },
       {
         "label": "SOX 지수 모멘텀",
-        "value": 7.7,
+        "value": -10.9,
         "unit": "3M",
-        "phase": "둔화",
-        "tone": "warn",
+        "phase": "침체",
+        "tone": "neg",
         "group": "market"
       },
       {
@@ -860,23 +860,23 @@
     ]
   },
   "stocks": {
-    "asOf": "2026-08-03",
+    "asOf": "2026-08-04",
     "items": [
       {
         "ticker": "000660.KS",
         "label": "SK하이닉스",
-        "r1m": -35.4,
-        "r3m": 21.9,
-        "r12m": 509.9,
-        "fromHigh": -46.3
+        "r1m": -35.0,
+        "r3m": 9.0,
+        "r12m": 513.8,
+        "fromHigh": -46.0
       },
       {
         "ticker": "005930.KS",
         "label": "삼성전자",
-        "r1m": -22.6,
-        "r3m": 8.7,
-        "r12m": 252.0,
-        "fromHigh": -33.9
+        "r1m": -22.5,
+        "r3m": 3.3,
+        "r12m": 248.7,
+        "fromHigh": -33.7
       },
       {
         "ticker": "MU",
@@ -895,7 +895,7 @@
         "fromHigh": -48.0
       }
     ],
-    "rsSpread1m": 12.8,
+    "rsSpread1m": 12.5,
     "rsFlip": true,
     "note": "삼전 재진입 트리거 = ① 1M RS 역전(스프레드 양수) AND ② 삼전 신고가 돌파(거래량). 고점比로 ②를 가늠."
   },
