@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-08T22:33:49+00:00",
+  "generatedAt": "2026-08-11T04:28:01+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -542,7 +542,7 @@
       "source": "PHLX ^SOX · yfinance",
       "sourceUrl": "https://www.nasdaq.com/market-activity/index/sox",
       "status": "auto",
-      "value": -3.7,
+      "value": -6.5,
       "asOf": "2026-08",
       "dir": "down",
       "history": [
@@ -688,23 +688,23 @@
         },
         {
           "t": "2026-08",
-          "v": -3.68
+          "v": -6.51
         }
       ],
       "mom": {
         "phase": "침체",
         "tone": "neg",
-        "level": -3.7,
-        "mom": -11.4,
-        "slope3": -62.1,
+        "level": -6.5,
+        "mom": -14.2,
+        "slope3": -64.9,
         "peakValue": 87.8,
         "peakTime": "2026-06",
         "peakAgo": 2,
-        "fromPeak": -91.4,
+        "fromPeak": -94.3,
         "troughValue": -16.7,
         "troughTime": "2023-10",
         "troughAgo": 34,
-        "fromTrough": 13.0,
+        "fromTrough": 10.2,
         "peakIdx": 33,
         "troughIdx": 1
       }
@@ -718,8 +718,8 @@
       "role": "업계 공식 기준점",
       "source": "WSTS / SIA 월간 보도자료",
       "sourceUrl": "https://www.semiconductors.org/category/news/global-sales-report/",
-      "value": 104.1,
-      "asOf": "2026-05",
+      "value": 123.6,
+      "asOf": "2026-06",
       "dir": "up",
       "history": [
         {
@@ -737,24 +737,28 @@
         {
           "t": "2026-05",
           "v": 104.1
+        },
+        {
+          "t": "2026-06",
+          "v": 123.6
         }
       ],
       "status": "manual",
       "mom": {
         "phase": "가속",
         "tone": "pos",
-        "level": 104.1,
-        "mom": 10.2,
-        "slope3": 42.3,
-        "peakValue": 104.1,
-        "peakTime": "2026-05",
+        "level": 123.6,
+        "mom": 19.5,
+        "slope3": 44.4,
+        "peakValue": 123.6,
+        "peakTime": "2026-06",
         "peakAgo": 0,
         "fromPeak": 0.0,
         "troughValue": 61.8,
         "troughTime": "2026-02",
-        "troughAgo": 3,
-        "fromTrough": 42.3,
-        "peakIdx": 3,
+        "troughAgo": 4,
+        "fromTrough": 61.8,
+        "peakIdx": 4,
         "troughIdx": 0
       }
     },
@@ -807,7 +811,7 @@
       },
       {
         "label": "SOX 지수 모멘텀",
-        "value": -3.7,
+        "value": -6.5,
         "unit": "3M",
         "phase": "침체",
         "tone": "neg",
@@ -815,7 +819,7 @@
       },
       {
         "label": "WSTS 글로벌 매출",
-        "value": 104.1,
+        "value": 123.6,
         "unit": "YoY",
         "phase": "가속",
         "tone": "pos",
@@ -835,67 +839,67 @@
     "liveCount": 5
   },
   "prelim": {
-    "asOf": "2026-07 · 전체",
+    "asOf": "2026-08 · 1~10일",
     "stage": "잠정",
-    "source": "관세청 월간",
+    "source": "관세청 순별 잠정",
     "sourceUrl": "https://www.customs.go.kr/kcs/na/ntt/selectNttList.do?bbsId=1362&mi=2891",
     "items": [
       {
         "label": "반도체 (전체·메모리 주도)",
-        "yoy": 178.8,
-        "mom": -8.5,
+        "yoy": 155.4,
+        "mom": 7.8,
         "hl": true
       },
       {
-        "label": "컴퓨터 (AI서버 SSD 등)",
-        "yoy": 404,
+        "label": "컴퓨터주변기기 (AI서버 SSD 등)",
+        "yoy": 139.5,
         "mom": 0,
         "hl": true
       },
       {
-        "label": "반도체 제조장비 (수입·1~20일)",
-        "yoy": 56.9,
+        "label": "반도체 제조장비 (수입·1~10일)",
+        "yoy": 77.3,
         "mom": 0
       }
     ]
   },
   "stocks": {
-    "asOf": "2026-08-07",
+    "asOf": "2026-08-11",
     "items": [
       {
         "ticker": "000660.KS",
         "label": "SK하이닉스",
-        "r1m": -35.4,
-        "r3m": -14.0,
-        "r12m": 445.0,
-        "fromHigh": -51.3
+        "r1m": -34.1,
+        "r3m": -23.6,
+        "r12m": 440.5,
+        "fromHigh": -50.8
       },
       {
         "ticker": "005930.KS",
         "label": "삼성전자",
-        "r1m": -22.0,
-        "r3m": -14.8,
-        "r12m": 231.8,
-        "fromHigh": -36.2
+        "r1m": -15.1,
+        "r3m": -15.1,
+        "r12m": 245.1,
+        "fromHigh": -33.2
       },
       {
         "ticker": "MU",
         "label": "Micron",
-        "r1m": -6.5,
-        "r3m": 35.7,
-        "r12m": 685.7,
-        "fromHigh": -27.7
+        "r1m": -12.1,
+        "r3m": 15.3,
+        "r12m": 625.4,
+        "fromHigh": -29.0
       },
       {
         "ticker": "SNDK",
         "label": "SanDisk",
-        "r1m": -25.1,
-        "r3m": -9.5,
-        "r12m": 2879.1,
-        "fromHigh": -48.1
+        "r1m": -35.4,
+        "r3m": -20.8,
+        "r12m": 2691.9,
+        "fromHigh": -47.0
       }
     ],
-    "rsSpread1m": 13.4,
+    "rsSpread1m": 19.0,
     "rsFlip": true,
     "note": "삼전 재진입 트리거 = ① 1M RS 역전(스프레드 양수) AND ② 삼전 신고가 돌파(거래량). 고점比로 ②를 가늠."
   },
