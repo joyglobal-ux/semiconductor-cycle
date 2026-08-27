@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-25T22:31:35+00:00",
+  "generatedAt": "2026-08-27T03:00:57+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -542,7 +542,7 @@
       "source": "PHLX ^SOX · yfinance",
       "sourceUrl": "https://www.nasdaq.com/market-activity/index/sox",
       "status": "auto",
-      "value": -9.7,
+      "value": -9.5,
       "asOf": "2026-08",
       "dir": "down",
       "history": [
@@ -688,23 +688,23 @@
         },
         {
           "t": "2026-08",
-          "v": -9.68
+          "v": -9.49
         }
       ],
       "mom": {
         "phase": "침체",
         "tone": "neg",
-        "level": -9.7,
-        "mom": -17.4,
-        "slope3": -68.1,
+        "level": -9.5,
+        "mom": -17.2,
+        "slope3": -67.9,
         "peakValue": 87.8,
         "peakTime": "2026-06",
         "peakAgo": 2,
-        "fromPeak": -97.4,
+        "fromPeak": -97.2,
         "troughValue": -16.7,
         "troughTime": "2023-10",
         "troughAgo": 34,
-        "fromTrough": 7.0,
+        "fromTrough": 7.2,
         "peakIdx": 33,
         "troughIdx": 1
       }
@@ -811,7 +811,7 @@
       },
       {
         "label": "SOX 지수 모멘텀",
-        "value": -9.7,
+        "value": -9.5,
         "unit": "3M",
         "phase": "침체",
         "tone": "neg",
@@ -864,42 +864,42 @@
     ]
   },
   "stocks": {
-    "asOf": "2026-08-25",
+    "asOf": "2026-08-27",
     "items": [
       {
         "ticker": "000660.KS",
         "label": "SK하이닉스",
-        "r1m": -4.6,
-        "r3m": -13.5,
-        "r12m": 549.3,
-        "fromHigh": -42.5
+        "r1m": -3.7,
+        "r3m": -22.0,
+        "r12m": 575.5,
+        "fromHigh": -40.1
       },
       {
         "ticker": "005930.KS",
         "label": "삼성전자",
-        "r1m": 3.0,
-        "r3m": -12.0,
-        "r12m": 264.0,
-        "fromHigh": -29.0
+        "r1m": 5.6,
+        "r3m": -12.5,
+        "r12m": 284.7,
+        "fromHigh": -25.9
       },
       {
         "ticker": "MU",
         "label": "Micron",
-        "r1m": 1.3,
-        "r3m": 24.2,
-        "r12m": 702.7,
-        "fromHigh": -23.1
+        "r1m": 1.9,
+        "r3m": 4.8,
+        "r12m": 706.8,
+        "fromHigh": -22.7
       },
       {
         "ticker": "SNDK",
         "label": "SanDisk",
-        "r1m": 3.1,
-        "r3m": 0.1,
-        "r12m": 3065.4,
-        "fromHigh": -36.6
+        "r1m": 4.4,
+        "r3m": -5.7,
+        "r12m": 3066.6,
+        "fromHigh": -35.8
       }
     ],
-    "rsSpread1m": 7.6,
+    "rsSpread1m": 9.3,
     "rsFlip": true,
     "note": "삼전 재진입 트리거 = ① 1M RS 역전(스프레드 양수) AND ② 삼전 신고가 돌파(거래량). 고점比로 ②를 가늠."
   },
