@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T12:58:23+00:00",
+  "generatedAt": "2026-09-01T23:53:32+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -542,14 +542,10 @@
       "source": "PHLX ^SOX · yfinance",
       "sourceUrl": "https://www.nasdaq.com/market-activity/index/sox",
       "status": "auto",
-      "value": -10.1,
-      "asOf": "2026-08",
+      "value": -20.8,
+      "asOf": "2026-09",
       "dir": "down",
       "history": [
-        {
-          "t": "2023-09",
-          "v": -6.5
-        },
         {
           "t": "2023-10",
           "v": -16.72
@@ -688,25 +684,29 @@
         },
         {
           "t": "2026-08",
-          "v": -10.09
+          "v": -10.6
+        },
+        {
+          "t": "2026-09",
+          "v": -20.76
         }
       ],
       "mom": {
         "phase": "침체",
         "tone": "neg",
-        "level": -10.1,
-        "mom": -17.8,
-        "slope3": -68.5,
+        "level": -20.8,
+        "mom": -10.2,
+        "slope3": -108.5,
         "peakValue": 87.8,
         "peakTime": "2026-06",
-        "peakAgo": 2,
-        "fromPeak": -97.8,
-        "troughValue": -16.7,
-        "troughTime": "2023-10",
-        "troughAgo": 34,
-        "fromTrough": 6.6,
-        "peakIdx": 33,
-        "troughIdx": 1
+        "peakAgo": 3,
+        "fromPeak": -108.5,
+        "troughValue": -20.8,
+        "troughTime": "2026-09",
+        "troughAgo": 0,
+        "fromTrough": 0.0,
+        "peakIdx": 32,
+        "troughIdx": 35
       }
     },
     {
@@ -811,7 +811,7 @@
       },
       {
         "label": "SOX 지수 모멘텀",
-        "value": -10.1,
+        "value": -20.8,
         "unit": "3M",
         "phase": "침체",
         "tone": "neg",
@@ -885,18 +885,18 @@
       {
         "ticker": "MU",
         "label": "Micron",
-        "r1m": 16.5,
-        "r3m": -1.2,
-        "r12m": 706.9,
-        "fromHigh": -21.0
+        "r1m": 13.4,
+        "r3m": -9.8,
+        "r12m": 685.6,
+        "fromHigh": -23.1
       },
       {
         "ticker": "SNDK",
         "label": "SanDisk",
-        "r1m": 29.0,
-        "r3m": -7.6,
-        "r12m": 2885.9,
-        "fromHigh": -32.9
+        "r1m": 26.5,
+        "r3m": -12.7,
+        "r12m": 2829.0,
+        "fromHigh": -34.2
       }
     ],
     "rsSpread1m": 0.8,
