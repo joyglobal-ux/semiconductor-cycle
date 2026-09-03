@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-02T23:55:33+00:00",
+  "generatedAt": "2026-09-03T12:29:06+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -864,23 +864,23 @@
     ]
   },
   "stocks": {
-    "asOf": "2026-09-02",
+    "asOf": "2026-09-03",
     "items": [
       {
         "ticker": "000660.KS",
         "label": "SK하이닉스",
-        "r1m": -6.1,
-        "r3m": -31.6,
-        "r12m": 521.0,
-        "fromHigh": -44.7
+        "r1m": 1.9,
+        "r3m": -32.4,
+        "r12m": 509.8,
+        "fromHigh": -45.3
       },
       {
         "ticker": "005930.KS",
         "label": "삼성전자",
-        "r1m": -4.6,
-        "r3m": -30.4,
-        "r12m": 267.1,
-        "fromHigh": -30.8
+        "r1m": 4.4,
+        "r3m": -30.6,
+        "r12m": 262.7,
+        "fromHigh": -31.0
       },
       {
         "ticker": "MU",
@@ -899,7 +899,7 @@
         "fromHigh": -33.5
       }
     ],
-    "rsSpread1m": 1.5,
+    "rsSpread1m": 2.5,
     "rsFlip": true,
     "note": "삼전 재진입 트리거 = ① 1M RS 역전(스프레드 양수) AND ② 삼전 신고가 돌파(거래량). 고점比로 ②를 가늠."
   },
