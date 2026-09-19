@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T00:00:14+00:00",
+  "generatedAt": "2026-09-19T00:00:59+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -365,14 +365,10 @@
       "source": "FRED · IPG3344S",
       "sourceUrl": "https://fred.stlouisfed.org/series/IPG3344S",
       "status": "auto",
-      "value": 11.9,
-      "asOf": "2026-07",
-      "dir": "up",
+      "value": 12.4,
+      "asOf": "2026-08",
+      "dir": "flat",
       "history": [
-        {
-          "t": "2023-08",
-          "v": 2.1
-        },
         {
           "t": "2023-09",
           "v": 0.27
@@ -495,41 +491,45 @@
         },
         {
           "t": "2026-03",
-          "v": 8.95
+          "v": 9.08
         },
         {
           "t": "2026-04",
-          "v": 8.74
+          "v": 8.92
         },
         {
           "t": "2026-05",
-          "v": 11.84
+          "v": 12.07
         },
         {
           "t": "2026-06",
-          "v": 14.87
+          "v": 14.92
         },
         {
           "t": "2026-07",
-          "v": 11.86
+          "v": 10.9
+        },
+        {
+          "t": "2026-08",
+          "v": 12.35
         }
       ],
       "mom": {
-        "phase": "가속 둔화",
-        "tone": "warn",
-        "level": 11.9,
-        "mom": -3.0,
-        "slope3": 3.1,
+        "phase": "정체",
+        "tone": "neutral",
+        "level": 12.3,
+        "mom": 1.4,
+        "slope3": 0.3,
         "peakValue": 19.6,
         "peakTime": "2025-07",
-        "peakAgo": 12,
-        "fromPeak": -7.8,
+        "peakAgo": 13,
+        "fromPeak": -7.3,
         "troughValue": 0.3,
         "troughTime": "2023-09",
-        "troughAgo": 34,
-        "fromTrough": 11.6,
-        "peakIdx": 23,
-        "troughIdx": 1
+        "troughAgo": 35,
+        "fromTrough": 12.1,
+        "peakIdx": 22,
+        "troughIdx": 0
       }
     },
     {
@@ -542,7 +542,7 @@
       "source": "PHLX ^SOX · yfinance",
       "sourceUrl": "https://www.nasdaq.com/market-activity/index/sox",
       "status": "auto",
-      "value": -18.6,
+      "value": -16.3,
       "asOf": "2026-09",
       "dir": "down",
       "history": [
@@ -688,25 +688,25 @@
         },
         {
           "t": "2026-09",
-          "v": -18.58
+          "v": -16.32
         }
       ],
       "mom": {
         "phase": "침체",
         "tone": "neg",
-        "level": -18.6,
-        "mom": -8.5,
-        "slope3": -106.3,
+        "level": -16.3,
+        "mom": -6.2,
+        "slope3": -104.1,
         "peakValue": 87.8,
         "peakTime": "2026-06",
         "peakAgo": 3,
-        "fromPeak": -106.3,
-        "troughValue": -18.6,
-        "troughTime": "2026-09",
-        "troughAgo": 0,
-        "fromTrough": 0.0,
+        "fromPeak": -104.1,
+        "troughValue": -16.7,
+        "troughTime": "2023-10",
+        "troughAgo": 35,
+        "fromTrough": 0.4,
         "peakIdx": 32,
-        "troughIdx": 35
+        "troughIdx": 0
       }
     },
     {
@@ -787,7 +787,7 @@
     "regime": "확장 · 둔화 조짐",
     "regimeEn": "Expansion, cooling",
     "tone": "warn",
-    "headline": "성장지표 5개 중 라이브 4개 — 3개 플러스 · 2개 가속 → 확장 · 둔화 조짐.  ⚠ 꺾임 감시: DRAM 수출물가(침체), 美 반도체 생산(가속 둔화).",
+    "headline": "성장지표 5개 중 라이브 4개 — 3개 플러스 · 2개 가속 → 확장 · 둔화 조짐.  ⚠ 꺾임 감시: DRAM 수출물가(침체).",
     "bullets": [
       {
         "label": "한국 반도체 수출",
@@ -807,15 +807,15 @@
       },
       {
         "label": "美 반도체 생산",
-        "value": 11.9,
+        "value": 12.4,
         "unit": "YoY",
-        "phase": "가속 둔화",
-        "tone": "warn",
+        "phase": "정체",
+        "tone": "neutral",
         "group": "growth"
       },
       {
         "label": "SOX 지수 모멘텀",
-        "value": -18.6,
+        "value": -16.3,
         "unit": "3M",
         "phase": "침체",
         "tone": "neg",
@@ -835,7 +835,7 @@
     "growthPositive": 3,
     "growthRising": 2,
     "marketLive": 1,
-    "coolingCount": 2,
+    "coolingCount": 1,
     "pendingCount": 1,
     "pendingNames": [
       "DRAM 고정거래가"
@@ -868,42 +868,42 @@
     ]
   },
   "stocks": {
-    "asOf": "2026-09-17",
+    "asOf": "2026-09-18",
     "items": [
       {
         "ticker": "000660.KS",
         "label": "SK하이닉스",
-        "r1m": 6.1,
+        "r1m": 11.8,
         "r3m": -30.8,
-        "r12m": 424.8,
-        "fromHigh": -40.2
+        "r12m": 423.9,
+        "fromHigh": -36.4
       },
       {
         "ticker": "005930.KS",
         "label": "삼성전자",
-        "r1m": -8.0,
-        "r3m": -27.0,
-        "r12m": 226.9,
-        "fromHigh": -30.3
+        "r1m": -2.8,
+        "r3m": -27.9,
+        "r12m": 229.1,
+        "fromHigh": -27.9
       },
       {
         "ticker": "MU",
         "label": "Micron",
-        "r1m": -4.6,
-        "r3m": -9.2,
-        "r12m": 484.3,
-        "fromHigh": -23.6
+        "r1m": -3.4,
+        "r3m": -6.3,
+        "r12m": 512.0,
+        "fromHigh": -19.4
       },
       {
         "ticker": "SNDK",
         "label": "SanDisk",
-        "r1m": -7.4,
-        "r3m": -23.7,
-        "r12m": 1560.3,
-        "fromHigh": -34.9
+        "r1m": -9.7,
+        "r3m": -17.6,
+        "r12m": 1618.0,
+        "fromHigh": -30.9
       }
     ],
-    "rsSpread1m": -14.1,
+    "rsSpread1m": -14.6,
     "rsFlip": false,
     "note": "삼전 재진입 트리거 = ① 1M RS 역전(스프레드 양수) AND ② 삼전 신고가 돌파(거래량). 고점比로 ②를 가늠."
   },
