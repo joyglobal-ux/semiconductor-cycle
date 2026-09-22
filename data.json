@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19T23:58:13+00:00",
+  "generatedAt": "2026-09-22T02:07:42+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -542,7 +542,7 @@
       "source": "PHLX ^SOX · yfinance",
       "sourceUrl": "https://www.nasdaq.com/market-activity/index/sox",
       "status": "auto",
-      "value": -16.3,
+      "value": -12.7,
       "asOf": "2026-09",
       "dir": "down",
       "history": [
@@ -688,23 +688,23 @@
         },
         {
           "t": "2026-09",
-          "v": -16.32
+          "v": -12.73
         }
       ],
       "mom": {
         "phase": "침체",
         "tone": "neg",
-        "level": -16.3,
-        "mom": -6.2,
-        "slope3": -104.1,
+        "level": -12.7,
+        "mom": -2.6,
+        "slope3": -100.5,
         "peakValue": 87.8,
         "peakTime": "2026-06",
         "peakAgo": 3,
-        "fromPeak": -104.1,
+        "fromPeak": -100.5,
         "troughValue": -16.7,
         "troughTime": "2023-10",
         "troughAgo": 35,
-        "fromTrough": 0.4,
+        "fromTrough": 4.0,
         "peakIdx": 32,
         "troughIdx": 0
       }
@@ -815,7 +815,7 @@
       },
       {
         "label": "SOX 지수 모멘텀",
-        "value": -16.3,
+        "value": -12.7,
         "unit": "3M",
         "phase": "침체",
         "tone": "neg",
@@ -843,67 +843,67 @@
     "liveCount": 5
   },
   "prelim": {
-    "asOf": "2026-09 · 1~10일",
+    "asOf": "2026-09 · 1~20일",
     "stage": "잠정",
     "source": "관세청 순별 잠정",
     "sourceUrl": "https://www.customs.go.kr/kcs/na/ntt/selectNttList.do?bbsId=1362&mi=2891",
     "items": [
       {
         "label": "반도체 (전체·메모리 주도)",
-        "yoy": 270.1,
-        "mom": 36.4,
+        "yoy": 259.4,
+        "mom": 18.4,
         "hl": true
       },
       {
         "label": "컴퓨터주변기기 (AI서버 SSD 등)",
-        "yoy": 93.1,
-        "mom": -10.9,
+        "yoy": 187.6,
+        "mom": 0,
         "hl": true
       },
       {
-        "label": "반도체 제조장비 (수입·1~10일)",
-        "yoy": 44.8,
-        "mom": 31.6
+        "label": "반도체 제조장비 (수입·1~20일)",
+        "yoy": 55.6,
+        "mom": 0
       }
     ]
   },
   "stocks": {
-    "asOf": "2026-09-18",
+    "asOf": "2026-09-22",
     "items": [
       {
         "ticker": "000660.KS",
         "label": "SK하이닉스",
-        "r1m": 11.8,
-        "r3m": -30.8,
-        "r12m": 423.9,
-        "fromHigh": -36.4
+        "r1m": 10.7,
+        "r3m": -34.4,
+        "r12m": 446.9,
+        "fromHigh": -34.4
       },
       {
         "ticker": "005930.KS",
         "label": "삼성전자",
-        "r1m": -2.8,
-        "r3m": -27.9,
-        "r12m": 229.1,
-        "fromHigh": -27.9
+        "r1m": -0.9,
+        "r3m": -21.0,
+        "r12m": 238.3,
+        "fromHigh": -22.9
       },
       {
         "ticker": "MU",
         "label": "Micron",
         "r1m": 8.0,
-        "r3m": -10.4,
-        "r12m": 502.4,
-        "fromHigh": -16.3
+        "r3m": -7.9,
+        "r12m": 542.6,
+        "fromHigh": -14.0
       },
       {
         "ticker": "SNDK",
         "label": "SanDisk",
-        "r1m": 10.2,
-        "r3m": -18.0,
-        "r12m": 1712.3,
-        "fromHigh": -23.3
+        "r1m": 10.7,
+        "r3m": -19.1,
+        "r12m": 1628.4,
+        "fromHigh": -24.3
       }
     ],
-    "rsSpread1m": -14.6,
+    "rsSpread1m": -11.6,
     "rsFlip": false,
     "note": "삼전 재진입 트리거 = ① 1M RS 역전(스프레드 양수) AND ② 삼전 신고가 돌파(거래량). 고점比로 ②를 가늠."
   },
