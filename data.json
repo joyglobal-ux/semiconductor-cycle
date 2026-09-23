@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T02:07:42+00:00",
+  "generatedAt": "2026-09-23T00:10:16+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -542,7 +542,7 @@
       "source": "PHLX ^SOX · yfinance",
       "sourceUrl": "https://www.nasdaq.com/market-activity/index/sox",
       "status": "auto",
-      "value": -12.7,
+      "value": -10.9,
       "asOf": "2026-09",
       "dir": "down",
       "history": [
@@ -688,23 +688,23 @@
         },
         {
           "t": "2026-09",
-          "v": -12.73
+          "v": -10.93
         }
       ],
       "mom": {
         "phase": "침체",
         "tone": "neg",
-        "level": -12.7,
-        "mom": -2.6,
-        "slope3": -100.5,
+        "level": -10.9,
+        "mom": -0.8,
+        "slope3": -98.7,
         "peakValue": 87.8,
         "peakTime": "2026-06",
         "peakAgo": 3,
-        "fromPeak": -100.5,
+        "fromPeak": -98.7,
         "troughValue": -16.7,
         "troughTime": "2023-10",
         "troughAgo": 35,
-        "fromTrough": 4.0,
+        "fromTrough": 5.8,
         "peakIdx": 32,
         "troughIdx": 0
       }
@@ -815,7 +815,7 @@
       },
       {
         "label": "SOX 지수 모멘텀",
-        "value": -12.7,
+        "value": -10.9,
         "unit": "3M",
         "phase": "침체",
         "tone": "neg",
@@ -873,18 +873,18 @@
       {
         "ticker": "000660.KS",
         "label": "SK하이닉스",
-        "r1m": 10.7,
-        "r3m": -34.4,
-        "r12m": 446.9,
-        "fromHigh": -34.4
+        "r1m": 6.4,
+        "r3m": -37.0,
+        "r12m": 425.8,
+        "fromHigh": -37.0
       },
       {
         "ticker": "005930.KS",
         "label": "삼성전자",
-        "r1m": -0.9,
-        "r3m": -21.0,
-        "r12m": 238.3,
-        "fromHigh": -22.9
+        "r1m": -1.8,
+        "r3m": -21.7,
+        "r12m": 235.3,
+        "fromHigh": -23.6
       },
       {
         "ticker": "MU",
@@ -903,7 +903,7 @@
         "fromHigh": -24.3
       }
     ],
-    "rsSpread1m": -11.6,
+    "rsSpread1m": -8.2,
     "rsFlip": false,
     "note": "삼전 재진입 트리거 = ① 1M RS 역전(스프레드 양수) AND ② 삼전 신고가 돌파(거래량). 고점比로 ②를 가늠."
   },
