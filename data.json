@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T01:09:42+00:00",
+  "generatedAt": "2026-10-01T01:09:35+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -868,42 +868,42 @@
     ]
   },
   "stocks": {
-    "asOf": "2026-09-30",
+    "asOf": "2026-10-01",
     "items": [
       {
         "ticker": "000660.KS",
         "label": "SK하이닉스",
-        "r1m": 9.1,
-        "r3m": -31.9,
-        "r12m": 420.5,
-        "fromHigh": -38.2
+        "r1m": 4.9,
+        "r3m": -30.6,
+        "r12m": 394.8,
+        "fromHigh": -39.1
       },
       {
         "ticker": "005930.KS",
         "label": "삼성전자",
-        "r1m": 6.2,
-        "r3m": -18.3,
-        "r12m": 228.0,
-        "fromHigh": -24.6
+        "r1m": 2.3,
+        "r3m": -15.1,
+        "r12m": 213.0,
+        "fromHigh": -26.3
       },
       {
         "ticker": "MU",
         "label": "Micron",
-        "r1m": 13.0,
-        "r3m": -6.9,
-        "r12m": 571.2,
-        "fromHigh": -13.1
+        "r1m": 14.2,
+        "r3m": -7.0,
+        "r12m": 550.9,
+        "fromHigh": -12.2
       },
       {
         "ticker": "SNDK",
         "label": "SanDisk",
-        "r1m": 15.3,
-        "r3m": -18.1,
-        "r12m": 1663.7,
-        "fromHigh": -26.6
+        "r1m": 16.5,
+        "r3m": -15.6,
+        "r12m": 1424.0,
+        "fromHigh": -25.9
       }
     ],
-    "rsSpread1m": -2.9,
+    "rsSpread1m": -2.6,
     "rsFlip": false,
     "note": "삼전 재진입 트리거 = ① 1M RS 역전(스프레드 양수) AND ② 삼전 신고가 돌파(거래량). 고점比로 ②를 가늠."
   },
