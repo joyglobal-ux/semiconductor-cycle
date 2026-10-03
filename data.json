@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T14:23:08+00:00",
+  "generatedAt": "2026-10-03T01:00:03+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -542,7 +542,7 @@
       "source": "PHLX ^SOX · yfinance",
       "sourceUrl": "https://www.nasdaq.com/market-activity/index/sox",
       "status": "auto",
-      "value": 17.2,
+      "value": 16.1,
       "asOf": "2026-10",
       "dir": "up",
       "history": [
@@ -688,23 +688,23 @@
         },
         {
           "t": "2026-10",
-          "v": 17.15
+          "v": 16.14
         }
       ],
       "mom": {
         "phase": "가속",
         "tone": "pos",
-        "level": 17.1,
-        "mom": 28.5,
-        "slope3": 9.5,
+        "level": 16.1,
+        "mom": 27.5,
+        "slope3": 8.4,
         "peakValue": 87.8,
         "peakTime": "2026-06",
         "peakAgo": 4,
-        "fromPeak": -70.6,
+        "fromPeak": -71.6,
         "troughValue": -15.7,
         "troughTime": "2025-04",
         "troughAgo": 18,
-        "fromTrough": 32.8,
+        "fromTrough": 31.8,
         "peakIdx": 31,
         "troughIdx": 17
       }
@@ -815,7 +815,7 @@
       },
       {
         "label": "SOX 지수 모멘텀",
-        "value": 17.2,
+        "value": 16.1,
         "unit": "3M",
         "phase": "가속",
         "tone": "pos",
@@ -889,18 +889,18 @@
       {
         "ticker": "MU",
         "label": "Micron",
-        "r1m": 14.5,
-        "r3m": 12.2,
-        "r12m": 496.7,
-        "fromHigh": -9.8
+        "r1m": 17.6,
+        "r3m": 6.3,
+        "r12m": 503.4,
+        "fromHigh": -9.6
       },
       {
         "ticker": "SNDK",
         "label": "SanDisk",
-        "r1m": 13.1,
-        "r3m": 0.7,
-        "r12m": 1315.7,
-        "fromHigh": -24.7
+        "r1m": 16.3,
+        "r3m": -12.0,
+        "r12m": 1376.0,
+        "fromHigh": -23.4
       }
     ],
     "rsSpread1m": -3.9,
