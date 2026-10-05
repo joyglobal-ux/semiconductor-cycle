@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T13:37:07+00:00",
+  "generatedAt": "2026-10-05T16:42:28+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -542,7 +542,7 @@
       "source": "PHLX ^SOX · yfinance",
       "sourceUrl": "https://www.nasdaq.com/market-activity/index/sox",
       "status": "auto",
-      "value": 16.1,
+      "value": 16.0,
       "asOf": "2026-10",
       "dir": "up",
       "history": [
@@ -688,23 +688,23 @@
         },
         {
           "t": "2026-10",
-          "v": 16.14
+          "v": 16.02
         }
       ],
       "mom": {
         "phase": "가속",
         "tone": "pos",
-        "level": 16.1,
-        "mom": 27.5,
-        "slope3": 8.4,
+        "level": 16.0,
+        "mom": 27.4,
+        "slope3": 8.3,
         "peakValue": 87.8,
         "peakTime": "2026-06",
         "peakAgo": 4,
-        "fromPeak": -71.6,
+        "fromPeak": -71.7,
         "troughValue": -15.7,
         "troughTime": "2025-04",
         "troughAgo": 18,
-        "fromTrough": 31.8,
+        "fromTrough": 31.7,
         "peakIdx": 31,
         "troughIdx": 17
       }
@@ -815,7 +815,7 @@
       },
       {
         "label": "SOX 지수 모멘텀",
-        "value": 16.1,
+        "value": 16.0,
         "unit": "3M",
         "phase": "가속",
         "tone": "pos",
@@ -868,7 +868,7 @@
     ]
   },
   "stocks": {
-    "asOf": "2026-10-02",
+    "asOf": "2026-10-05",
     "items": [
       {
         "ticker": "000660.KS",
@@ -889,18 +889,18 @@
       {
         "ticker": "MU",
         "label": "Micron",
-        "r1m": 12.4,
-        "r3m": 10.2,
-        "r12m": 485.9,
-        "fromHigh": -11.4
+        "r1m": 4.8,
+        "r3m": 9.2,
+        "r12m": 467.8,
+        "fromHigh": -12.2
       },
       {
         "ticker": "SNDK",
         "label": "SanDisk",
-        "r1m": 10.7,
-        "r3m": -1.4,
-        "r12m": 1285.5,
-        "fromHigh": -26.3
+        "r1m": -1.8,
+        "r3m": -2.0,
+        "r12m": 1231.3,
+        "fromHigh": -26.8
       }
     ],
     "rsSpread1m": -3.9,
