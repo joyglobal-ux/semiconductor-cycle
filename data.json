@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T01:38:46+00:00",
+  "generatedAt": "2026-10-09T00:40:45+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -542,7 +542,7 @@
       "source": "PHLX ^SOX · yfinance",
       "sourceUrl": "https://www.nasdaq.com/market-activity/index/sox",
       "status": "auto",
-      "value": 15.5,
+      "value": 11.6,
       "asOf": "2026-10",
       "dir": "up",
       "history": [
@@ -688,23 +688,23 @@
         },
         {
           "t": "2026-10",
-          "v": 15.52
+          "v": 11.6
         }
       ],
       "mom": {
         "phase": "가속",
         "tone": "pos",
-        "level": 15.5,
-        "mom": 26.9,
-        "slope3": 7.8,
+        "level": 11.6,
+        "mom": 23.0,
+        "slope3": 3.9,
         "peakValue": 87.8,
         "peakTime": "2026-06",
         "peakAgo": 4,
-        "fromPeak": -72.2,
+        "fromPeak": -76.2,
         "troughValue": -15.7,
         "troughTime": "2025-04",
         "troughAgo": 18,
-        "fromTrough": 31.2,
+        "fromTrough": 27.3,
         "peakIdx": 31,
         "troughIdx": 17
       }
@@ -718,14 +718,10 @@
       "role": "업계 공식 기준점",
       "source": "WSTS / SIA 월간 보도자료",
       "sourceUrl": "https://www.semiconductors.org/category/news/global-sales-report/",
-      "value": 135.1,
-      "asOf": "2026-07",
+      "value": 144.3,
+      "asOf": "2026-08",
       "dir": "up",
       "history": [
-        {
-          "t": "2026-02",
-          "v": 61.8
-        },
         {
           "t": "2026-03",
           "v": 79.2
@@ -745,23 +741,27 @@
         {
           "t": "2026-07",
           "v": 135.1
+        },
+        {
+          "t": "2026-08",
+          "v": 144.3
         }
       ],
       "status": "manual",
       "mom": {
         "phase": "가속",
         "tone": "pos",
-        "level": 135.1,
-        "mom": 11.5,
-        "slope3": 41.2,
-        "peakValue": 135.1,
-        "peakTime": "2026-07",
+        "level": 144.3,
+        "mom": 9.2,
+        "slope3": 40.2,
+        "peakValue": 144.3,
+        "peakTime": "2026-08",
         "peakAgo": 0,
         "fromPeak": 0.0,
-        "troughValue": 61.8,
-        "troughTime": "2026-02",
+        "troughValue": 79.2,
+        "troughTime": "2026-03",
         "troughAgo": 5,
-        "fromTrough": 73.3,
+        "fromTrough": 65.1,
         "peakIdx": 5,
         "troughIdx": 0
       }
@@ -815,7 +815,7 @@
       },
       {
         "label": "SOX 지수 모멘텀",
-        "value": 15.5,
+        "value": 11.6,
         "unit": "3M",
         "phase": "가속",
         "tone": "pos",
@@ -823,7 +823,7 @@
       },
       {
         "label": "WSTS 글로벌 매출",
-        "value": 135.1,
+        "value": 144.3,
         "unit": "YoY",
         "phase": "가속",
         "tone": "pos",
@@ -873,18 +873,18 @@
       {
         "ticker": "000660.KS",
         "label": "SK하이닉스",
-        "r1m": -2.6,
-        "r3m": -15.9,
-        "r12m": 342.8,
-        "fromHigh": -40.2
+        "r1m": -6.2,
+        "r3m": -19.0,
+        "r12m": 326.3,
+        "fromHigh": -42.4
       },
       {
         "ticker": "005930.KS",
         "label": "삼성전자",
-        "r1m": -0.2,
-        "r3m": -3.1,
-        "r12m": 202.1,
-        "fromHigh": -25.7
+        "r1m": -2.8,
+        "r3m": -5.6,
+        "r12m": 194.3,
+        "fromHigh": -27.6
       },
       {
         "ticker": "MU",
@@ -903,7 +903,7 @@
         "fromHigh": -27.5
       }
     ],
-    "rsSpread1m": 2.4,
+    "rsSpread1m": 3.4,
     "rsFlip": true,
     "note": "삼전 재진입 트리거 = ① 1M RS 역전(스프레드 양수) AND ② 삼전 신고가 돌파(거래량). 고점比로 ②를 가늠."
   },
