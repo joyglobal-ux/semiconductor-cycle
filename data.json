@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T00:40:45+00:00",
+  "generatedAt": "2026-10-09T01:51:59+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -889,18 +889,18 @@
       {
         "ticker": "MU",
         "label": "Micron",
-        "r1m": 7.0,
-        "r3m": 15.9,
-        "r12m": 486.5,
-        "fromHigh": -10.3
+        "r1m": 3.6,
+        "r3m": 9.2,
+        "r12m": 427.6,
+        "fromHigh": -14.6
       },
       {
         "ticker": "SNDK",
         "label": "SanDisk",
-        "r1m": -2.7,
-        "r3m": 4.6,
-        "r12m": 1299.3,
-        "fromHigh": -27.5
+        "r1m": -7.4,
+        "r3m": -6.8,
+        "r12m": 1120.4,
+        "fromHigh": -31.1
       }
     ],
     "rsSpread1m": 3.4,
