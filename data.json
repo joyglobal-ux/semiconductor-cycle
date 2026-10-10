@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T01:51:59+00:00",
+  "generatedAt": "2026-10-10T01:34:51+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -542,7 +542,7 @@
       "source": "PHLX ^SOX · yfinance",
       "sourceUrl": "https://www.nasdaq.com/market-activity/index/sox",
       "status": "auto",
-      "value": 11.6,
+      "value": 11.2,
       "asOf": "2026-10",
       "dir": "up",
       "history": [
@@ -688,23 +688,23 @@
         },
         {
           "t": "2026-10",
-          "v": 11.6
+          "v": 11.15
         }
       ],
       "mom": {
         "phase": "가속",
         "tone": "pos",
-        "level": 11.6,
-        "mom": 23.0,
-        "slope3": 3.9,
+        "level": 11.2,
+        "mom": 22.5,
+        "slope3": 3.5,
         "peakValue": 87.8,
         "peakTime": "2026-06",
         "peakAgo": 4,
-        "fromPeak": -76.2,
+        "fromPeak": -76.6,
         "troughValue": -15.7,
         "troughTime": "2025-04",
         "troughAgo": 18,
-        "fromTrough": 27.3,
+        "fromTrough": 26.8,
         "peakIdx": 31,
         "troughIdx": 17
       }
@@ -815,7 +815,7 @@
       },
       {
         "label": "SOX 지수 모멘텀",
-        "value": 11.6,
+        "value": 11.2,
         "unit": "3M",
         "phase": "가속",
         "tone": "pos",
@@ -868,7 +868,7 @@
     ]
   },
   "stocks": {
-    "asOf": "2026-10-08",
+    "asOf": "2026-10-09",
     "items": [
       {
         "ticker": "000660.KS",
@@ -889,18 +889,18 @@
       {
         "ticker": "MU",
         "label": "Micron",
-        "r1m": 3.6,
-        "r3m": 9.2,
-        "r12m": 427.6,
-        "fromHigh": -14.6
+        "r1m": 0.1,
+        "r3m": 3.8,
+        "r12m": 435.5,
+        "fromHigh": -15.2
       },
       {
         "ticker": "SNDK",
         "label": "SanDisk",
-        "r1m": -7.4,
-        "r3m": -6.8,
-        "r12m": 1120.4,
-        "fromHigh": -31.1
+        "r1m": -10.3,
+        "r3m": -14.9,
+        "r12m": 1119.8,
+        "fromHigh": -32.3
       }
     ],
     "rsSpread1m": 3.4,
