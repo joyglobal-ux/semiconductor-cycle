@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T00:21:31+00:00",
+  "generatedAt": "2026-10-16T00:09:21+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -11,14 +11,10 @@
       "source": "한국은행 ECOS · 수출금액지수(반도체)",
       "sourceUrl": "https://ecos.bok.or.kr/",
       "status": "auto",
-      "value": 213.4,
-      "asOf": "2026-08",
+      "value": 268.1,
+      "asOf": "2026-09",
       "dir": "up",
       "history": [
-        {
-          "t": "2023-09",
-          "v": -13.77
-        },
         {
           "t": "2023-10",
           "v": -4.26
@@ -158,22 +154,26 @@
         {
           "t": "2026-08",
           "v": 213.44
+        },
+        {
+          "t": "2026-09",
+          "v": 268.08
         }
       ],
       "mom": {
         "phase": "가속",
         "tone": "pos",
-        "level": 213.4,
-        "mom": 31.4,
-        "slope3": 40.7,
-        "peakValue": 213.4,
-        "peakTime": "2026-08",
+        "level": 268.1,
+        "mom": 54.6,
+        "slope3": 65.0,
+        "peakValue": 268.1,
+        "peakTime": "2026-09",
         "peakAgo": 0,
         "fromPeak": 0.0,
-        "troughValue": -13.8,
-        "troughTime": "2023-09",
+        "troughValue": -4.3,
+        "troughTime": "2023-10",
         "troughAgo": 35,
-        "fromTrough": 227.2,
+        "fromTrough": 272.3,
         "peakIdx": 35,
         "troughIdx": 0
       }
@@ -188,14 +188,10 @@
       "source": "한국은행 ECOS · 수출물가지수(DRAM)",
       "sourceUrl": "https://ecos.bok.or.kr/",
       "status": "auto",
-      "value": -3.4,
-      "asOf": "2026-08",
+      "value": -1.2,
+      "asOf": "2026-09",
       "dir": "down",
       "history": [
-        {
-          "t": "2023-09",
-          "v": 0.83
-        },
         {
           "t": "2023-10",
           "v": 9.95
@@ -335,24 +331,28 @@
         {
           "t": "2026-08",
           "v": -3.36
+        },
+        {
+          "t": "2026-09",
+          "v": -1.18
         }
       ],
       "mom": {
         "phase": "침체",
         "tone": "neg",
-        "level": -3.4,
-        "mom": -10.0,
-        "slope3": -11.0,
+        "level": -1.2,
+        "mom": 2.2,
+        "slope3": -4.3,
         "peakValue": 31.6,
         "peakTime": "2026-01",
-        "peakAgo": 7,
-        "fromPeak": -35.0,
+        "peakAgo": 8,
+        "fromPeak": -32.8,
         "troughValue": -3.5,
         "troughTime": "2025-02",
-        "troughAgo": 18,
-        "fromTrough": 0.2,
-        "peakIdx": 28,
-        "troughIdx": 17
+        "troughAgo": 19,
+        "fromTrough": 2.3,
+        "peakIdx": 27,
+        "troughIdx": 16
       }
     },
     {
@@ -542,7 +542,7 @@
       "source": "PHLX ^SOX · yfinance",
       "sourceUrl": "https://www.nasdaq.com/market-activity/index/sox",
       "status": "auto",
-      "value": 3.3,
+      "value": 2.4,
       "asOf": "2026-10",
       "dir": "up",
       "history": [
@@ -688,23 +688,23 @@
         },
         {
           "t": "2026-10",
-          "v": 3.3
+          "v": 2.39
         }
       ],
       "mom": {
         "phase": "둔화",
         "tone": "warn",
-        "level": 3.3,
-        "mom": 14.7,
-        "slope3": -4.4,
+        "level": 2.4,
+        "mom": 13.8,
+        "slope3": -5.3,
         "peakValue": 87.8,
         "peakTime": "2026-06",
         "peakAgo": 4,
-        "fromPeak": -84.5,
+        "fromPeak": -85.4,
         "troughValue": -15.7,
         "troughTime": "2025-04",
         "troughAgo": 18,
-        "fromTrough": 19.0,
+        "fromTrough": 18.1,
         "peakIdx": 31,
         "troughIdx": 17
       }
@@ -791,7 +791,7 @@
     "bullets": [
       {
         "label": "한국 반도체 수출",
-        "value": 213.4,
+        "value": 268.1,
         "unit": "YoY",
         "phase": "가속",
         "tone": "pos",
@@ -799,7 +799,7 @@
       },
       {
         "label": "DRAM 수출물가",
-        "value": -3.4,
+        "value": -1.2,
         "unit": "MoM",
         "phase": "침체",
         "tone": "neg",
@@ -815,7 +815,7 @@
       },
       {
         "label": "SOX 지수 모멘텀",
-        "value": 3.3,
+        "value": 2.4,
         "unit": "3M",
         "phase": "둔화",
         "tone": "warn",
@@ -873,37 +873,37 @@
       {
         "ticker": "000660.KS",
         "label": "SK하이닉스",
-        "r1m": -22.0,
-        "r3m": -36.6,
-        "r12m": 213.1,
-        "fromHigh": -54.8
+        "r1m": -25.3,
+        "r3m": -39.4,
+        "r12m": 199.6,
+        "fromHigh": -56.8
       },
       {
         "ticker": "005930.KS",
         "label": "삼성전자",
-        "r1m": -11.9,
-        "r3m": -21.6,
-        "r12m": 132.4,
-        "fromHigh": -39.5
+        "r1m": -15.5,
+        "r3m": -24.9,
+        "r12m": 122.8,
+        "fromHigh": -42.0
       },
       {
         "ticker": "MU",
         "label": "Micron",
-        "r1m": -2.3,
-        "r3m": 1.7,
-        "r12m": 395.0,
-        "fromHigh": -21.4
+        "r1m": -1.1,
+        "r3m": -7.0,
+        "r12m": 389.2,
+        "fromHigh": -24.7
       },
       {
         "ticker": "SNDK",
         "label": "SanDisk",
-        "r1m": -9.2,
-        "r3m": -11.4,
-        "r12m": 1001.2,
-        "fromHigh": -36.5
+        "r1m": -9.6,
+        "r3m": -20.2,
+        "r12m": 1002.5,
+        "fromHigh": -39.9
       }
     ],
-    "rsSpread1m": 10.1,
+    "rsSpread1m": 9.8,
     "rsFlip": true,
     "note": "삼전 재진입 트리거 = ① 1M RS 역전(스프레드 양수) AND ② 삼전 신고가 돌파(거래량). 고점比로 ②를 가늠."
   },
