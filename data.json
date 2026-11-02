@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T14:40:09+00:00",
+  "generatedAt": "2026-11-02T06:12:56+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -843,48 +843,48 @@
     "liveCount": 5
   },
   "prelim": {
-    "asOf": "2026-10 · 1~20일",
+    "asOf": "2026-10 · 전체",
     "stage": "잠정",
-    "source": "관세청 순별 잠정",
+    "source": "관세청 월간",
     "sourceUrl": "https://www.customs.go.kr/kcs/na/ntt/selectNttList.do?bbsId=1362&mi=2891",
     "items": [
       {
         "label": "반도체 (전체·메모리 주도)",
-        "yoy": 222.5,
-        "mom": -3.8,
+        "yoy": 259.4,
+        "mom": -6.4,
         "hl": true
       },
       {
         "label": "컴퓨터주변기기 (AI서버 SSD 등)",
-        "yoy": 424.0,
+        "yoy": 496.6,
         "mom": 0,
         "hl": true
       },
       {
-        "label": "반도체 제조장비 (수입·1~20일)",
-        "yoy": 93.4,
+        "label": "반도체 제조장비 (수입·월간)",
+        "yoy": 49.2,
         "mom": 0
       }
     ]
   },
   "stocks": {
-    "asOf": "2026-10-30",
+    "asOf": "2026-11-02",
     "items": [
       {
         "ticker": "000660.KS",
         "label": "SK하이닉스",
-        "r1m": -20.2,
-        "r3m": 7.3,
-        "r12m": 150.4,
-        "fromHigh": -51.4
+        "r1m": -19.5,
+        "r3m": -13.7,
+        "r12m": 165.9,
+        "fromHigh": -49.2
       },
       {
         "ticker": "005930.KS",
         "label": "삼성전자",
-        "r1m": -16.2,
-        "r3m": 8.7,
-        "r12m": 117.9,
-        "fromHigh": -37.9
+        "r1m": -16.6,
+        "r3m": -12.3,
+        "r12m": 115.9,
+        "fromHigh": -36.4
       },
       {
         "ticker": "MU",
@@ -903,7 +903,7 @@
         "fromHigh": -50.7
       }
     ],
-    "rsSpread1m": 4.0,
+    "rsSpread1m": 2.9,
     "rsFlip": true,
     "note": "삼전 재진입 트리거 = ① 1M RS 역전(스프레드 양수) AND ② 삼전 신고가 돌파(거래량). 고점比로 ②를 가늠."
   },
