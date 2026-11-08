@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T01:43:21+00:00",
+  "generatedAt": "2026-11-08T01:11:49+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -897,10 +897,10 @@
       {
         "ticker": "SNDK",
         "label": "SanDisk",
-        "r1m": -52.7,
-        "r3m": -40.3,
-        "r12m": 272.5,
-        "fromHigh": -65.5
+        "r1m": -49.7,
+        "r3m": -33.7,
+        "r12m": 302.1,
+        "fromHigh": -64.2
       }
     ],
     "rsSpread1m": 5.6,
