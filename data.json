@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T01:11:49+00:00",
+  "generatedAt": "2026-11-09T02:07:15+00:00",
   "indicators": [
     {
       "id": "kr_semi_exports",
@@ -718,14 +718,10 @@
       "role": "업계 공식 기준점",
       "source": "WSTS / SIA 월간 보도자료",
       "sourceUrl": "https://www.semiconductors.org/category/news/global-sales-report/",
-      "value": 144.3,
-      "asOf": "2026-08",
+      "value": 146.8,
+      "asOf": "2026-09",
       "dir": "up",
       "history": [
-        {
-          "t": "2026-03",
-          "v": 79.2
-        },
         {
           "t": "2026-04",
           "v": 93.9
@@ -745,23 +741,27 @@
         {
           "t": "2026-08",
           "v": 144.3
+        },
+        {
+          "t": "2026-09",
+          "v": 146.8
         }
       ],
       "status": "manual",
       "mom": {
         "phase": "가속",
         "tone": "pos",
-        "level": 144.3,
-        "mom": 9.2,
-        "slope3": 40.2,
-        "peakValue": 144.3,
-        "peakTime": "2026-08",
+        "level": 146.8,
+        "mom": 2.5,
+        "slope3": 23.2,
+        "peakValue": 146.8,
+        "peakTime": "2026-09",
         "peakAgo": 0,
         "fromPeak": 0.0,
-        "troughValue": 79.2,
-        "troughTime": "2026-03",
+        "troughValue": 93.9,
+        "troughTime": "2026-04",
         "troughAgo": 5,
-        "fromTrough": 65.1,
+        "fromTrough": 52.9,
         "peakIdx": 5,
         "troughIdx": 0
       }
@@ -823,7 +823,7 @@
       },
       {
         "label": "WSTS 글로벌 매출",
-        "value": 144.3,
+        "value": 146.8,
         "unit": "YoY",
         "phase": "가속",
         "tone": "pos",
@@ -868,23 +868,23 @@
     ]
   },
   "stocks": {
-    "asOf": "2026-11-06",
+    "asOf": "2026-11-09",
     "items": [
       {
         "ticker": "000660.KS",
         "label": "SK하이닉스",
-        "r1m": -36.2,
-        "r3m": -24.3,
-        "r12m": 91.5,
-        "fromHigh": -61.2
+        "r1m": -29.5,
+        "r3m": -16.6,
+        "r12m": 104.9,
+        "fromHigh": -59.4
       },
       {
         "ticker": "005930.KS",
         "label": "삼성전자",
-        "r1m": -30.6,
-        "r3m": -16.7,
-        "r12m": 95.1,
-        "fromHigh": -47.0
+        "r1m": -25.9,
+        "r3m": -14.5,
+        "r12m": 103.3,
+        "fromHigh": -45.5
       },
       {
         "ticker": "MU",
@@ -903,7 +903,7 @@
         "fromHigh": -64.2
       }
     ],
-    "rsSpread1m": 5.6,
+    "rsSpread1m": 3.6,
     "rsFlip": true,
     "note": "삼전 재진입 트리거 = ① 1M RS 역전(스프레드 양수) AND ② 삼전 신고가 돌파(거래량). 고점比로 ②를 가늠."
   },
